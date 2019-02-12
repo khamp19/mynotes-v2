@@ -4,7 +4,6 @@ import logo from './logo.svg';
 import './App.css';
 import LandingPage from './Components/landingPage';
 import Auth from './Components/Authentication/auth';
-import Login from './Components/Authentication/login';
 
 class App extends Component {
   render() {
@@ -19,7 +18,6 @@ class App extends Component {
         </div>
         <div>
           <Auth />
-          <Login />
         </div>
       </div>
     );
