@@ -9,10 +9,11 @@ import { createStore, applyMiddleware } from 'redux';
 
 import './index.css';
 import App from './App';
-import AllReducers from './Reducers/AllReducers';
+// import AllReducers from './Reducers/AllReducers';
+import AuthReducer from './Reducers/AuthReducer';
 
 const middleware = applyMiddleware(thunk, logger);
-const store = createStore(AllReducers, middleware);
+const store = createStore(AuthReducer, middleware);
 
 ReactDOM.render(
   <Provider store={store}>

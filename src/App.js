@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 
 import logo from './logo.svg';
 import './App.css';
+import { getUser } from './Actions/AuthActions';
 import LandingPage from './Components/landingPage';
-import Auth from './Components/Authentication/auth';
+import Login from './Components/Authentication/login';
+import SuccessPage from './Components/Authentication/loginSuccess';
+
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getUser();
+    console.log('app props', this.props);
+  }
+  
   render() {
     return (
       <div className="App">
@@ -17,11 +27,20 @@ class App extends Component {
           <LandingPage />
         </div>
         <div>
-          <Auth />
+          {this.props.loggedIn ? <SuccessPage /> : <Login />}
         </div>
       </div>
     );
   }
 }
+const mapStateToProps = state => {
+  console.log('state', state);
+  return {
+    getting_user: state.getting_user,
+    loggedIn: state.loggedIn,
+    username: state.username,
+    auth_error: state.auth_error,
+  }
+}
 
-export default App;
+export default connect(mapStateToProps, { getUser })(App);
