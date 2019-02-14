@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-//import react router dom
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './index.css';
 import App from './App';
@@ -17,9 +17,10 @@ const store = createStore(AuthReducer, middleware);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
-  
   , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
