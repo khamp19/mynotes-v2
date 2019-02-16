@@ -35,10 +35,10 @@ class App extends Component {
 const mapStateToProps = state => {
   console.log('state', state);
   return {
-    getting_user: state.getting_user,
-    loggedIn: state.loggedIn,
-    username: state.username,
-    auth_error: state.auth_error,
+    getting_user: state.AuthReducer.getting_user,
+    loggedIn: state.AuthReducer.loggedIn,
+    username: state.AuthReducer.username,
+    auth_error: state.AuthReducer.auth_error,
   }
 }
 

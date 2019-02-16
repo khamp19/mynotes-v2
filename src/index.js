@@ -9,11 +9,11 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-// import AllReducers from './Reducers/AllReducers';
+import rootReducer from './Reducers/AllReducers';
 import AuthReducer from './Reducers/AuthReducer';
 
 const middleware = applyMiddleware(thunk, logger);
-const store = createStore(AuthReducer, middleware);
+const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
   <Provider store={store}>
