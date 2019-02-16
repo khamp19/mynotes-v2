@@ -1,4 +1,36 @@
 //create a button that clears localStorage and
-//updates the logged-in status
+//updates the logged-in status (to false)
 //should redirect to a page that says
 //"thanks for using our app"
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { logUserOut } from '../../Actions/AuthActions';
+
+class LogoutButton extends Component {
+  
+  logMeOut = (e) => {
+    e.preventDefault();
+    this.props.logUserOut();
+    console.log('logging you out');
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.logMeOut}>
+          Log Out
+        </button>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loggingOut: state.AuthReducer.loggingOut,
+  }
+}
+
+export default connect(mapStateToProps, { logUserOut })(LogoutButton);
