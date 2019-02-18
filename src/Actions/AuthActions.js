@@ -10,7 +10,6 @@ export const getUser = () => {
     dispatch({type: GET_USER});
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
-    console.log('user data', user);
     if (user === null) {
       dispatch({ type: AUTH_ERROR });
     } else {
