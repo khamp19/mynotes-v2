@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import rootReducer from './Reducers/AllReducers';
-import AuthReducer from './Reducers/AuthReducer';
 
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(rootReducer, middleware);
@@ -18,7 +17,9 @@ const store = createStore(rootReducer, middleware);
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <div>
+        <Route exact path='/' component={App} />
+      </div>
     </Router>
   </Provider>
   , document.getElementById('root'));

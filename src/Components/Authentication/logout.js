@@ -1,7 +1,5 @@
 //create a button that clears localStorage and
 //updates the logged-in status (to false)
-//should redirect to a page that says
-//"thanks for using our app"
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
