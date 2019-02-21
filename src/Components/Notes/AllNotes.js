@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getAllNotes } from '../../Actions/NotesActions';
 
@@ -14,13 +15,17 @@ class AllNotes extends Component {
       <div>
         <p>Hello from AllNotes</p>
         <div>
-          {this.props.getting_notes ? <h4>Getting list of notes</h4> : null}
-          {this.props.notes_error ? <h4>Cannot get notes</h4> : null}
+          {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
+          {this.props.notes_error ? <h3>Cannot get notes</h3> : null}
           {this.props.notes.map((note, i) => {
               return (
                 <div>
                   <ul>
-                    <li key={i}><h3>{note.title}</h3></li>
+                    <li key={i}>
+                      <Link to={`/notes/${note._id}`}>
+                        <h3>{note.title}</h3>
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               )

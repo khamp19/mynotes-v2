@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './index.css';
 import App from './App';
+import NoteDetail from './Components/Notes/NoteDetail';
 import rootReducer from './Reducers/AllReducers';
 
 const middleware = applyMiddleware(thunk, logger);
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Route exact path='/' component={App} />
+        <Route path='/notes/:id' component={NoteDetail} />
       </div>
     </Router>
   </Provider>
@@ -28,3 +30,11 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+/*
+Not sure I want to do this this way bc of authentication
+<Route path='/notes' component={AllNotes} />
+
+Other Routes:
+<Route path='/notes/new-note' component={NewNote} />
+*/
