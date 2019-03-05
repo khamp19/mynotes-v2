@@ -39,3 +39,10 @@ button {
   margin: 10px;
   border-radius: 10px;
 }
+
+input {
+  display: block;
+  /* width: 400px; */
+  padding: 5px;
+  margin: 10px;
+}

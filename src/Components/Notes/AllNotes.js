@@ -13,7 +13,6 @@ class AllNotes extends Component {
   render() {
     return (
       <div>
-        <p>Hello from AllNotes</p>
         <div>
           {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
           {this.props.notes_error ? <h3>Cannot get notes</h3> : null}

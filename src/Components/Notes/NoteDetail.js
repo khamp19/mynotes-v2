@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { getNote } from '../../Actions/NotesActions';
 
@@ -14,6 +15,8 @@ class NoteDetail extends Component {
 
     render() {
     const { title, content, created_at } = this.props.note;
+    const note_id = this.props.match.params.id;
+    
     let date = String(created_at);
     date = date.substr(0, 10);
     date = moment(date, "YYYY-MM-DD").format("MMM Do YYYY");
@@ -22,7 +25,9 @@ class NoteDetail extends Component {
       <div>
         <div>
           <header>
-            <button>Home</button>
+            <Link to='/'>
+              <button>Home</button>
+            </Link>
           </header>
           {this.props.error ? <h4>Error getting this note</h4> : null}
           {this.props.note ? 
@@ -35,7 +40,9 @@ class NoteDetail extends Component {
                 <p>content: {content}</p>
               </div>
               <div>
-                <button>Edit Note</button>
+                <Link to={`/notes/${note_id}/update`} >
+                  <button>Edit Note</button>
+                </Link>
                 <button>Delete Note</button>
               </div>
             </div>
