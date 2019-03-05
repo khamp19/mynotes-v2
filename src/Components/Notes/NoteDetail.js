@@ -4,49 +4,42 @@ import moment from 'moment';
 
 import { getNote } from '../../Actions/NotesActions';
 
-class NoteDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: '',
-    }
-  }
+//needs edit and delete functions as buttons
+//link the home button back to the homepage
 
+class NoteDetail extends Component {
   componentDidMount() {
     this.props.getNote(this.props.match.params.id);
   }
 
-  // MOVE THIS FUNCTION INTO YOUR RENDER METHOD
-  // REMOVE STATE
-  getDate = () => {
-    if(this.props.note.id) {
-    //   const date = this.state;
-    //   let year = moment(date).year();
-    //   let day = moment(date).date();
-    //   let month = moment(date).month();
-    //   let str = moment(`${day}-${month + 1}-${year}`, "Do-MM-YYYY").format('ddd, MMM Do YYYY');
-    //   console.log(str);
-      // this.setState({ date: str });
-      console.log('state date: ', this.state.date);
-    }
-  }
-
-  render() {
+    render() {
     const { title, content, created_at } = this.props.note;
-    const { date } = this.state;
+    let date = String(created_at);
+    date = date.substr(0, 10);
+    date = moment(date, "YYYY-MM-DD").format("MMM Do YYYY");
+
     return (
       <div>
         <div>
-          {this.props.getting_note ? <h4>Getting Note</h4> : null}
+          <header>
+            <button>Home</button>
+          </header>
           {this.props.error ? <h4>Error getting this note</h4> : null}
-          {
+          {this.props.note ? 
             <div>
-              <p>Note info:</p>
-              <h3>title: {title}</h3>
-              <p>content: {content}</p>
-              {this.getDate(created_at)}
-              <p>{date}</p>
+              <div>
+                <h3>title: {title}</h3>
+                <p>{date}</p>
+              </div>
+              <div>
+                <p>content: {content}</p>
+              </div>
+              <div>
+                <button>Edit Note</button>
+                <button>Delete Note</button>
+              </div>
             </div>
+            : null
           }
         </div>
       </div>
