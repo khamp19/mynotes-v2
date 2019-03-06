@@ -11,6 +11,7 @@ import './index.css';
 import App from './App';
 import NoteDetail from './Components/Notes/NoteDetail';
 import EditNote from './Components/Notes/EditNote';
+import AddNote from './Components/Notes/AddNote';
 import rootReducer from './Reducers/AllReducers';
 
 const middleware = applyMiddleware(thunk, logger);
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Route exact path='/' component={App} />
+        <Route path='/new-note' component={AddNote} />
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route path='/notes/:id/update' component={EditNote} />
       </div>

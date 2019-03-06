@@ -27,6 +27,7 @@ class EditNote extends Component {
   }
 
   updateNote = (e) => {
+    e.preventDefault();
     //call update note function here
     this.setState({
       title: '',
