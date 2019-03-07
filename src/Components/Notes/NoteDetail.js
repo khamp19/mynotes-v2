@@ -59,7 +59,7 @@ const mapStateToProps = state => {
   return {
     getting_note: state.SelectedNoteReducer.getting_note,
     note: state.SelectedNoteReducer.note,
-    error: state.SelectedNoteReducer.error,
+    error: state.SelectedNoteReducer.note_error,
   }
 }
 

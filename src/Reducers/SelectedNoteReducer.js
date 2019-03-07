@@ -1,11 +1,19 @@
 //import your actions
-import { GETTING_NOTE, NOTE, NOTE_ERROR} from '../Actions/NotesActions';
+import { 
+  GETTING_NOTE, 
+  NOTE, 
+  NOTE_ERROR, 
+  SAVING,
+  SAVE_ERROR,
+} from '../Actions/NotesActions';
 
 //set your default state
 const defaultState = {
+  saving: false,
   getting_note: false,
   note: {},
-  error: '',
+  note_error: '',
+  save_error: '',
 }
 
 //switch statement
@@ -15,9 +23,14 @@ const SelectedNoteReducer = (state = defaultState, action) => {
       return Object.assign({}, state, {
         getting_note: true,
       });
+    case SAVING:
+      return Object.assign({}, state, {
+        saving: true,
+      });
     case NOTE:
       return Object.assign({}, state, {
         getting_note: false,
+        saving: false,
         note: Object.assign({}, {
           id: action.note._id,
           title: action.note.title,
@@ -28,7 +41,12 @@ const SelectedNoteReducer = (state = defaultState, action) => {
     case NOTE_ERROR:
       return Object.assign({}, state, {
         getting_note: false,
-        error: action.error
+        note_error: action.error
+      })
+    case SAVE_ERROR:
+      return Object.assign({}, state, {
+        saving: false,
+        save_error: action.error,
       })
     default:
       return state;

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 const DATA_URL = `https://lit-lake-67095.herokuapp.com`;
 
 //getting all notes in database:
@@ -29,7 +28,7 @@ export const NOTE_ERROR = 'NOTE_ERROR';
 
 export const getNote = (id) => {
   return dispatch => {
-    dispatch({ type: GETTING_NOTE});
+    dispatch({type: GETTING_NOTE});
     axios.get(`${DATA_URL}/notes/${id}`)
     .then((response) => {
       dispatch({type: NOTE, note: response.data})
@@ -37,6 +36,25 @@ export const getNote = (id) => {
     .catch((error) => {
       console.log('error getting note', error);
       dispatch({type: NOTE_ERROR});
+    })
+  }
+}
+
+export const SAVING = 'SAVING';
+// export const SAVED = 'SAVED';
+export const SAVE_ERROR = 'SAVE_ERROR';
+
+export const addNote = (noteData) => {
+  return dispatch => {
+    dispatch({type: SAVING});
+    axios.post(`${DATA_URL}/notes/`, noteData)
+    .then((response) => {
+      console.log('save successful', response.data);
+      dispatch({type: NOTE, note: response.data})
+    })
+    .catch((error) => {
+      console.log('error saving note', error);
+      dispatch({ type: SAVE_ERROR });
     })
   }
 }

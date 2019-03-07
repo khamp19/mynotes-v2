@@ -3,8 +3,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 //import add note action
+import { addNote } from '../../Actions/NotesActions';
 
 class AddNote extends Component {
   constructor(props){
@@ -23,7 +25,14 @@ class AddNote extends Component {
 
   saveNote = (e) => {
     e.preventDefault();
-    //call add note funtion here
+    const newNote = {
+      title: this.state.title,
+      content: this.state.content,
+    }
+    // if(!newNote.title){
+    //   alert 'please add a title'
+    // }
+    this.props.addNote(newNote);
     this.setState({
       title: '',
       content: '',
@@ -55,10 +64,26 @@ class AddNote extends Component {
             </form>
             <button onClick={this.saveNote}>Save Note</button>
           </div>
-        </div>
+        </div>        
       </div>
     )
   }
 }
 
-export default AddNote;
+const mapStateToProps = state => {
+  console.log('new note state', state)
+  return {
+    saving: state.SelectedNoteReducer.saving,
+    error: state.SelectedNoteReducer.save_error,
+    note: state.SelectedNoteReducer.note,
+  }
+}
+
+export default connect(mapStateToProps, { addNote })(AddNote);
+
+// <div>
+//   {this.props.note ?
+//     <Redirect to={`/notes/${this.props.note._id}`} />
+//     : <Redirect to={'/notes'} />
+//   }
+// </div>
