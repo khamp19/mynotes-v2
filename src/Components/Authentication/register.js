@@ -24,25 +24,27 @@ class Register extends Component {
 
   createUser = (e) => {
     e.preventDefault();
-    console.log('new user info', this.state);
+    // console.log('new user info', this.state);
     axios.post('https://lit-lake-67095.herokuapp.com/user/register', this.state)
       .then(res => {
         console.log('response', res);
-        this.setState({ token: res.data.token});
-        console.log('token', this.state.token);
+        this.setState({ 
+          token: res.data.token,
+          toHome: true,
+        });
+        // console.log('token', this.state.token);
+        // console.log('redir state', this.state.toHome);
         localStorage.setItem('token', this.state.token)
       })
       .catch(err => console.log(err));
     this.setState({
       username: '',
       password: '',
-      toHome: true,
     })
-
   }
 
   render(){
-    if(this.state.toHome === true) {
+    if(this.state.toHome === true){
       return <Redirect to='/notes' />
     }
     return (

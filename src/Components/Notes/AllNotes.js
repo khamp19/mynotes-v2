@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Login from '../Authentication/login';
+
 
 import { getAllNotes } from '../../Actions/NotesActions';
 
@@ -13,6 +15,10 @@ class AllNotes extends Component {
   render() {
     return (
       <div>
+        <header>
+          <Login />
+        </header>
+        <h2>Here are All Notes</h2>
         <div>
           {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
           {this.props.notes_error ? <h3>Cannot get notes</h3> : null}

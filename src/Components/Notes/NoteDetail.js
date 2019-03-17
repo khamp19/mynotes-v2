@@ -25,7 +25,7 @@ class NoteDetail extends Component {
       <div>
         <div>
           <header>
-            <Link to='/'>
+            <Link to='/notes'>
               <button>Home</button>
             </Link>
           </header>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+
+import Logout from './logout';
 import { getUser } from '../../Actions/AuthActions';
 
 // import login action
@@ -8,14 +11,23 @@ import { getUser } from '../../Actions/AuthActions';
 // loguserin fn and un and pw from state
 
 //allow user to send username and password to backend
-//set received token to state
+//set received token to state and localStorage
+//set received username to localStorage
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      token: ''
+      token: '',
+      loggedIn: false,
+    }
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem('token');
+    if(token) {
+      this.setState({ loggedIn: true})
     }
   }
 
@@ -27,21 +39,34 @@ class Login extends Component {
 
   LogUserIn = (e) => {
     e.preventDefault();
-    console.log("logging you in");
-    const user = {
-      username: this.state.username,
-      password: this.state.password,
-    }
-    localStorage.setItem("user", JSON.stringify(user));
+    axios.put('https://lit-lake-67095.herokuapp.com/user/login', this.state)
+      .then( res => {
+        this.setState({ 
+          token: res.data.token,
+          loggedIn: true,
+        })
+        localStorage.setItem("token", this.state.token);
+        localStorage.setItem("user", this.state.username);
+      })
     this.setState({
       username: '',
       password:''
     })
-    //call login action function here
-    this.props.getUser();
+    //REDUX: call login action function here
+    // this.props.getUser();
   }
-
+  
+  
+  //need to render navigation and logout after logging in
   render() {
+    if(this.state.loggedIn === true) {
+      return (
+        <div>
+          <Logout />
+        </div>
+      )
+    }
+
     const { username, password } = this.state;
     return (
       <div>
