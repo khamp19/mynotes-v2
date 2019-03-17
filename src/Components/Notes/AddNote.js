@@ -14,6 +14,7 @@ class AddNote extends Component {
     this.state = {
       title: '',
       content: '',
+      //saved: false
     }
   }
 
@@ -41,6 +42,7 @@ class AddNote extends Component {
 
   render() {
     const { title, content } = this.state;
+    //if saved = true Redirect here
     return (
       <div>
         <div>
