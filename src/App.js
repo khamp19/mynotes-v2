@@ -5,13 +5,12 @@ import logo from './logo.svg';
 import './App.css';
 import { getUser } from './Actions/AuthActions';
 import LandingPage from './Components/landingPage';
-import Login from './Components/Authentication/login';
-import SuccessPage from './Components/Authentication/loginSuccess';
+import Register from './Components/Authentication/register';
 
 
 class App extends Component {
   componentDidMount() {
-    this.props.getUser();
+    // this.props.getUser();
   }
   
   render() {
@@ -24,8 +23,8 @@ class App extends Component {
         <div>
           <LandingPage />
         </div>
+        <Register />
         <div>
-          {this.props.loggedIn ? <SuccessPage /> : <Login />}
         </div>
       </div>
     );
