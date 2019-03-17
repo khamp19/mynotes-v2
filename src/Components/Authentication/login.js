@@ -7,13 +7,15 @@ import { getUser } from '../../Actions/AuthActions';
 // import connect and mapstatetoprops then connect the 
 // loguserin fn and un and pw from state
 
-//allow user to set username and password
+//allow user to send username and password to backend
+//set received token to state
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
+      token: ''
     }
   }
 
