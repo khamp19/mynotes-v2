@@ -14,7 +14,7 @@ class AddNote extends Component {
     this.state = {
       title: '',
       content: '',
-      //saved: false
+      saved: false
     }
   }
 
@@ -35,12 +35,16 @@ class AddNote extends Component {
     // }
     this.props.addNote(newNote);
     this.setState({
+      saved: true,
       title: '',
       content: '',
     })
   }
 
   render() {
+    // if(this.state.saved === true) {
+    //   return <Redirect to=''
+    // }
     const { title, content } = this.state;
     //if saved = true Redirect here
     return (
@@ -73,7 +77,6 @@ class AddNote extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('new note state', state)
   return {
     saving: state.SelectedNoteReducer.saving,
     error: state.SelectedNoteReducer.save_error,

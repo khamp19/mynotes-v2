@@ -25,16 +25,17 @@ class Register extends Component {
   createUser = (e) => {
     e.preventDefault();
     // console.log('new user info', this.state);
+    let username = this.state.username.toLowerCase();
+    this.setState({ username: username });
+    localStorage.setItem('username', this.state.username);
     axios.post('https://lit-lake-67095.herokuapp.com/user/register', this.state)
       .then(res => {
         console.log('response', res);
-        this.setState({ 
+        this.setState({
           token: res.data.token,
           toHome: true,
         });
-        // console.log('token', this.state.token);
-        // console.log('redir state', this.state.toHome);
-        localStorage.setItem('token', this.state.token)
+        localStorage.setItem('token', this.state.token);
       })
       .catch(err => console.log(err));
     this.setState({
@@ -43,8 +44,8 @@ class Register extends Component {
     })
   }
 
-  render(){
-    if(this.state.toHome === true){
+  render() {
+    if (this.state.toHome === true) {
       return <Redirect to='/notes' />
     }
     return (
@@ -53,13 +54,13 @@ class Register extends Component {
         <p>please create a username and password</p>
         <div>
           <form onSubmit={this.createUser}>
-            <input 
+            <input
               name="username"
               type="text"
               placeholder="username"
               value={this.state.username}
               onChange={this.handleInput} />
-            <input 
+            <input
               name="password"
               type="password"
               placeholder="password"

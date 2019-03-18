@@ -41,9 +41,7 @@ export const getNote = (id) => {
 }
 
 export const SAVING = 'SAVING';
-// export const SAVED = 'SAVED';
 export const SAVE_ERROR = 'SAVE_ERROR';
-
 export const addNote = (noteData) => {
   return dispatch => {
     dispatch({type: SAVING});

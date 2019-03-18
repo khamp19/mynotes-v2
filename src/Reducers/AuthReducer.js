@@ -1,25 +1,25 @@
 //import your actions from authActions
-import { 
-  GET_USER, 
-  SUCCESS, 
-  AUTH_ERROR, 
-  LOGGING_OUT, 
-  LOG_OUT_SUCCESS 
+import {
+  GET_USER,
+  SUCCESS,
+  AUTH_ERROR,
+  LOGGING_OUT,
+  LOG_OUT_SUCCESS
 } from '../Actions/AuthActions';
 
 const defaultState = {
   getting_user: false,
-  loggedIn: false, 
-  username: '', 
+  loggedIn: false,
+  username: '',
   auth_error: '',
   loggingOut: false,
 };
 
 const AuthReducer = (state = defaultState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_USER:
       return Object.assign({}, state, {
-        getting_user: true, 
+        getting_user: true,
         loggedIn: false
       });
     case SUCCESS:
@@ -30,7 +30,7 @@ const AuthReducer = (state = defaultState, action) => {
       });
     case AUTH_ERROR:
       return Object.assign({}, state, {
-        getting_user: false, 
+        getting_user: false,
         error: 'no user found, please log in'
       });
     case LOGGING_OUT:
@@ -46,7 +46,7 @@ const AuthReducer = (state = defaultState, action) => {
         loggingOut: false,
       })
     default:
-     return state;
+      return state;
   }
 }
 

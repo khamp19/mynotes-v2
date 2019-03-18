@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Login from '../Authentication/login';
+import UserNav from '../Users/UserNav';
 
 
 import { getAllNotes } from '../../Actions/NotesActions';
@@ -16,8 +16,13 @@ class AllNotes extends Component {
     return (
       <div>
         <header>
-          <Login />
+          <UserNav />
         </header>
+        <div>
+          <Link to={`/new-note`}>
+            <button>Add New Note</button>
+          </Link>
+        </div>
         <h2>Here are All Notes</h2>
         <div>
           {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
@@ -42,7 +47,6 @@ class AllNotes extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('notes state', state);
   return {
     getting_notes: state.NotesReducer.getting_notes,
     notes: state.NotesReducer.notes,

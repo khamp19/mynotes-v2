@@ -24,10 +24,14 @@ class Login extends Component {
     }
   }
 
-  componentDidMount(){
-    const token = localStorage.getItem('token');
-    if(token) {
-      this.setState({ loggedIn: true})
+  componentDidMount() {
+    this.checkLogInStatus();
+  }
+
+  checkLogInStatus = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.setState({ loggedIn: true })
     }
   }
 
@@ -39,27 +43,29 @@ class Login extends Component {
 
   LogUserIn = (e) => {
     e.preventDefault();
+    let username = this.state.username.toLowerCase();
+    this.setState({ username: username });
     axios.put('https://lit-lake-67095.herokuapp.com/user/login', this.state)
-      .then( res => {
-        this.setState({ 
+      .then(res => {
+        this.setState({
           token: res.data.token,
           loggedIn: true,
         })
         localStorage.setItem("token", this.state.token);
-        localStorage.setItem("user", this.state.username);
+        localStorage.setItem("username", this.state.username);
       })
     this.setState({
       username: '',
-      password:''
+      password: ''
     })
     //REDUX: call login action function here
     // this.props.getUser();
   }
-  
-  
+
+
   //need to render navigation and logout after logging in
   render() {
-    if(this.state.loggedIn === true) {
+    if (this.state.loggedIn === true) {
       return (
         <div>
           <Logout />
@@ -73,14 +79,14 @@ class Login extends Component {
         <h2>please log in</h2>
         <div>
           <form onSubmit={this.LogUserIn}>
-            <input 
+            <input
               placeholder="username"
               name="username"
               type="text"
               value={username}
               onChange={this.handleInput}
             />
-            <input 
+            <input
               placeholder="password"
               name="password"
               type="password"
@@ -102,4 +108,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getUser }) (Login);
+export default connect(mapStateToProps, { getUser })(Login);

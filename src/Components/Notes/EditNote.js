@@ -75,7 +75,7 @@ class EditNote extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('note update state', state);
+  // console.log('note update state', state);
   return {
     getting_note: state.SelectedNoteReducer.getting_note,
     note: state.SelectedNoteReducer.note,
