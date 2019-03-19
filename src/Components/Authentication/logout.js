@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import { logUserOut } from '../../Actions/AuthActions';
 
 class LogoutButton extends Component {
-  state = {
-    loggedIn: this.props.loggedIn,
-  }
+  // state = {
+  //   loggedIn: true,
+  // }
   
   logMeOut = (e) => {
     e.preventDefault();
     this.props.logUserOut();
-    this.setState({ loggedIn: false });
+    // this.setState({ loggedIn: false });
     console.log('logging you out');
   }
 

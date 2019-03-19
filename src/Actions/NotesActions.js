@@ -43,9 +43,10 @@ export const getNote = (id) => {
 export const SAVING = 'SAVING';
 export const SAVE_ERROR = 'SAVE_ERROR';
 export const addNote = (noteData) => {
+  const token = localStorage.getItem('token');
   return dispatch => {
     dispatch({type: SAVING});
-    axios.post(`${DATA_URL}/notes/`, noteData)
+    axios.post(`${DATA_URL}/notes/`, noteData, {headers: {Authorization: token}})
     .then((response) => {
       console.log('save successful', response.data);
       dispatch({type: NOTE, note: response.data})

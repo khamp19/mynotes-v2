@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import UserNav from '../Users/UserNav';
 
 
 import { getAllNotes } from '../../Actions/NotesActions';
@@ -15,9 +14,6 @@ class AllNotes extends Component {
   render() {
     return (
       <div>
-        <header>
-          <UserNav />
-        </header>
         <div>
           <Link to={`/new-note`}>
             <button>Add New Note</button>

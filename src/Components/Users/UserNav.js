@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //import actions
+import { getUser } from '../../Actions/AuthActions';
 
 //import components
 import Login from '../Authentication/login';
@@ -17,6 +18,18 @@ class UserNav extends Component {
     loggedIn: false,
   }
 
+  componentDidMount() {
+    // this.checkLogInStatus();
+    this.props.getUser();
+  }
+
+  checkLogInStatus = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.setState({ loggedIn: true })
+    }
+  }
+
   //use component did mount to get loggedIn status from redux store
   //update logged in status here to render right element
   render(){
@@ -27,9 +40,22 @@ class UserNav extends Component {
     return(
       <div>
         <p>Logged into User Navbar</p>
+        <Link to='/notes'>
+          <button>Home</button>
+        </Link>
+        <Link to='/dashboard'>
+          <button>Dashboard</button>
+        </Link>
+        <Logout />
       </div>
     )
   }
 }
 
-export default UserNav;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.AuthReducer.loggedIn,
+  }
+}
+
+export default connect(mapStateToProps, { getUser })(UserNav);

@@ -1,5 +1,5 @@
 export const GET_USER = 'GET_USER';
-export const SUCCESS = 'SUCCESS';
+export const AUTHENTICATED = 'AUTHENTICATED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGGING_OUT = 'LOGGING_OUT';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
@@ -15,12 +15,12 @@ export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const getUser = () => {
   return dispatch => {
     dispatch({ type: GET_USER });
-    let user = localStorage.getItem("user");
-    user = JSON.parse(user);
-    if (user === null) {
+    let username = localStorage.getItem("username");
+    let token = localStorage.getItem("token");
+    if (token === null) {
       dispatch({ type: AUTH_ERROR });
     } else {
-      dispatch({ type: SUCCESS, username: user.username });
+      dispatch({ type: AUTHENTICATED, username: username });
     }
   }
 }

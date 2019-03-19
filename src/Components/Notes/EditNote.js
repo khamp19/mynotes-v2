@@ -43,6 +43,8 @@ class EditNote extends Component {
     return(
       <div>
         <div>
+        </div>
+        <div>
           <p>hello from edit note!</p>
         </div>
         <div>

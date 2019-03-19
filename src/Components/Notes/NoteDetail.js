@@ -13,7 +13,7 @@ class NoteDetail extends Component {
     this.props.getNote(this.props.match.params.id);
   }
 
-    render() {
+  render() {
     const { title, content, created_at } = this.props.note;
     const note_id = this.props.match.params.id;
     
@@ -24,11 +24,6 @@ class NoteDetail extends Component {
     return (
       <div>
         <div>
-          <header>
-            <Link to='/notes'>
-              <button>Home</button>
-            </Link>
-          </header>
           {this.props.error ? <h4>Error getting this note</h4> : null}
           {this.props.note ? 
             <div>

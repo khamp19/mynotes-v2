@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 //import add note action
 import { addNote } from '../../Actions/NotesActions';
@@ -43,8 +43,10 @@ class AddNote extends Component {
 
   render() {
     // if(this.state.saved === true) {
-    //   return <Redirect to=''
+    //   const {id} = this.props.note._id;
+    //   return <Redirect to={`/notes/${id}`} />
     // }
+
     const { title, content } = this.state;
     //if saved = true Redirect here
     return (
@@ -69,6 +71,7 @@ class AddNote extends Component {
                 onChange={this.handleInput} />
             </form>
             <button onClick={this.saveNote}>Save Note</button>
+            <Link to='/notes'><button>Back</button></Link>
           </div>
         </div>        
       </div>

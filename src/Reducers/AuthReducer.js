@@ -1,7 +1,7 @@
 //import your actions from authActions
 import {
   GET_USER,
-  SUCCESS,
+  AUTHENTICATED,
   AUTH_ERROR,
   LOGGING_OUT,
   LOG_OUT_SUCCESS
@@ -22,7 +22,7 @@ const AuthReducer = (state = defaultState, action) => {
         getting_user: true,
         loggedIn: false
       });
-    case SUCCESS:
+    case AUTHENTICATED:
       return Object.assign({}, state, {
         getting_user: false,
         loggedIn: true,

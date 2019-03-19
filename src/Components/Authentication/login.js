@@ -19,21 +19,19 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      token: '',
-      loggedIn: false,
     }
   }
 
-  componentDidMount() {
-    this.checkLogInStatus();
-  }
+  // componentDidMount() {
+  //   this.checkLogInStatus();
+  // }
 
-  checkLogInStatus = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.setState({ loggedIn: true })
-    }
-  }
+  // checkLogInStatus = () => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     this.setState({ loggedIn: true })
+  //   }
+  // }
 
   handleInput = (e) => {
     this.setState({
@@ -65,14 +63,6 @@ class Login extends Component {
 
   //need to render navigation and logout after logging in
   render() {
-    if (this.state.loggedIn === true) {
-      return (
-        <div>
-          <Logout />
-        </div>
-      )
-    }
-
     const { username, password } = this.state;
     return (
       <div>
