@@ -58,7 +58,7 @@ export const addNote = (noteData) => {
   }
 }
 
-export const updateNote = (noteData, id) => {
+export const updateNote = (id, noteData) => {
   const token = localStorage.getItem('token');
   return dispatch => {
     dispatch({ type: SAVING });
@@ -73,3 +73,4 @@ export const updateNote = (noteData, id) => {
       })
   }
 }
+

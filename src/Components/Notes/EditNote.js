@@ -1,13 +1,9 @@
-//(follow what you did for Note Detail page)
-//back button functionality
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getNote, updateNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
-//import update note action
 
 class EditNote extends Component {
   constructor(props){
@@ -40,26 +36,22 @@ class EditNote extends Component {
 
   updateNote = (e) => {
     e.preventDefault();
-    //call update note function here
     const id = this.props.match.params.id;
     const noteData = {
       title: this.state.title,
       content: this.state.content,
     }
-    console.log('update note id', id);
-    console.log('new note info', noteData);
     this.props.updateNote(id, noteData);
     this.setState({
       title: '',
       content: '',
     })
-    // setTimeout(()=> {
-    //   this.props.history.push(`/notes/${id}`);
-    // }, 500);
+    setTimeout(()=> {
+      this.props.history.push(`/notes/${id}`);
+    }, 500);
   }
 
   render() {
-    // console.log('update note props', this.props.note);
     const { title, content } = this.state;
     let note_id = '';
     if(this.props.note){
@@ -69,11 +61,19 @@ class EditNote extends Component {
     // if(this.props.username){
     //   loggedInUser = this.props.username;
     // }
-
-    if(this.props.note.username !== loggedInUser){
+    if(!loggedInUser){
+      return (
+        <div>
+          <p>you must be logged in to edit this note</p>
+          <Link to={`/notes/${note_id}`}>
+            <button>Back</button>
+          </Link>
+        </div> 
+      )
+    } else if(this.props.note.username !== loggedInUser){
       return(
         <div>
-         <p>you must be logged in to edit this note</p>
+         <p>you are not authorized to edit this note</p>
           <Link to={`/notes/${note_id}`}>
             <button>Back</button>
           </Link>
@@ -125,7 +125,6 @@ class EditNote extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('note update state', state);
   return {
     getting_note: state.SelectedNoteReducer.getting_note,
     note: state.SelectedNoteReducer.note,
