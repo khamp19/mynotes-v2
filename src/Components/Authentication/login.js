@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
-import { getUser } from '../../Actions/AuthActions';
-
-// import login action
-
-// import connect and mapstatetoprops then connect the 
-// loguserin fn and un and pw from state
+import { logUserIn, getUser } from '../../Actions/AuthActions';
+import Redirect from 'react-router-dom/Redirect';
 
 //allow user to send username and password to backend
-//set received token to state and localStorage
-//set received username to localStorage
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,27 +15,31 @@ class Login extends Component {
     }
   }
 
+  //check login status
+  componentDidMount() {
+    this.props.getUser();
+    setTimeout(() => {
+      this.setState({
+        loggedIn: this.props.loggedIn,
+      });
+    }, 200)
+  }
+
+
   handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
 
-  LogUserIn = (e) => {
+  LogIn = (e) => {
     e.preventDefault();
     let username = this.state.username.toLowerCase();
     this.setState({ username: username });
-    axios.put('https://lit-lake-67095.herokuapp.com/user/login', this.state)
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.username);
-        this.setState({
-          loggedIn: true,
-        })
-        this.props.getUser();
-        this.props.history.push('/notes');
-      })
-      .catch(err => console.log(err))
+    this.props.logUserIn(this.state);
+    setTimeout(()=>{
+      this.setState({loggedIn: this.props.loggedIn})
+    }, 500)
     this.setState({
       username: '',
       password: ''
@@ -50,14 +47,17 @@ class Login extends Component {
   }
 
 
-  //need to render navigation and logout after logging in
   render() {
+    if(this.state.loggedIn === true){
+      return <Redirect to='/notes' />
+    }
+
     const { username, password } = this.state;
     return (
       <div>
         <h2>please log in</h2>
         <div>
-          <form onSubmit={this.LogUserIn}>
+          <form onSubmit={this.LogIn}>
             <input
               placeholder="username"
               name="username"
@@ -72,7 +72,7 @@ class Login extends Component {
               value={password}
               onChange={this.handleInput}
             />
-            <button onClick={this.LogUserIn}>Log In</button>
+            <button onClick={this.LogIn}>Log In</button>
           </form>
         </div>
       </div>
@@ -88,4 +88,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getUser })(Login);
+export default connect(mapStateToProps, { logUserIn, getUser })(Login);

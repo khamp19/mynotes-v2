@@ -1,5 +1,7 @@
 //import your actions from authActions
 import {
+  MAKE_USER,
+  MAKE_USER_ERROR,
   GET_USER,
   AUTHENTICATED,
   AUTH_ERROR,
@@ -8,6 +10,8 @@ import {
 } from '../Actions/AuthActions';
 
 const defaultState = {
+  creating_user: false,
+  new_user_error: '',
   getting_user: false,
   loggedIn: false,
   username: '',
@@ -18,6 +22,16 @@ const defaultState = {
 
 const AuthReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case MAKE_USER:
+      return Object.assign({}, state, {
+        creating_user: true,
+        loggedIn: false,
+      })
+    case MAKE_USER_ERROR:
+      return Object.assign({}, state, {
+        creating_user: false,
+        new_user_error: 'error creating user, please try again'
+      })
     case GET_USER:
       return Object.assign({}, state, {
         getting_user: true,
@@ -25,9 +39,11 @@ const AuthReducer = (state = defaultState, action) => {
       });
     case AUTHENTICATED:
       return Object.assign({}, state, {
+        creating_user: false,
         getting_user: false,
         loggedIn: true,
-        username: state.username.concat(action.username)
+        username: state.username.concat(action.username),
+        // userNotes: state.userNotes.push(action.userNotes),
       });
     case AUTH_ERROR:
       return Object.assign({}, state, {
@@ -40,9 +56,12 @@ const AuthReducer = (state = defaultState, action) => {
       });
     case LOG_OUT_SUCCESS:
       return Object.assign({}, state, {
+        creating_user: false,
+        new_user_error: '',
         getting_user: false,
         loggedIn: false,
         username: '',
+        userNotes: [],
         auth_error: '',
         loggingOut: false,
       })
