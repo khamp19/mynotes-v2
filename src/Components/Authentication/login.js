@@ -40,6 +40,7 @@ class Login extends Component {
           loggedIn: true,
         })
         this.props.getUser();
+        this.props.history.push('/notes');
       })
       .catch(err => console.log(err))
     this.setState({

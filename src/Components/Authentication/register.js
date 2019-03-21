@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getUser } from '../../Actions/AuthActions';
 
 //should let user create un and pw
 //should save un and pw to backend
@@ -12,7 +14,6 @@ class Register extends Component {
   state = {
     username: '',
     password: '',
-    token: '',
     toHome: false,
   }
 
@@ -24,24 +25,25 @@ class Register extends Component {
 
   createUser = (e) => {
     e.preventDefault();
-    // console.log('new user info', this.state);
     let username = this.state.username.toLowerCase();
     this.setState({ username: username });
-    localStorage.setItem('username', this.state.username);
     axios.post('https://lit-lake-67095.herokuapp.com/user/register', this.state)
       .then(res => {
-        console.log('response', res);
-        this.setState({
-          token: res.data.token,
-          toHome: true,
-        });
-        localStorage.setItem('token', this.state.token);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.username);
+        this.props.getUser();
+        if(this.props.loggedIn === true){
+          this.setState({
+            toHome: true,
+          });
+        }
       })
       .catch(err => console.log(err));
     this.setState({
       username: '',
       password: '',
     })
+
   }
 
   render() {
@@ -74,4 +76,9 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.AuthReducer.loggedIn,
+  }
+}
+export default connect(mapStateToProps, { getUser }) (Register);

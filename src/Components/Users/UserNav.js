@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getUser } from '../../Actions/AuthActions';
 
 //import components
-import Login from '../Authentication/login';
+// import Login from '../Authentication/login';
 import Logout from '../Authentication/logout';
 
 //user navigation navbar
@@ -24,7 +24,14 @@ class UserNav extends Component {
   //update logged in status here to render right element
   render(){
     if (this.props.loggedIn === false) {
-      return <Login />
+      // return <Login />
+      return (
+        <div>
+          <Link to='/login'>
+            <button>Login</button>
+          </Link>
+        </div>
+      )
     }
 
     return(

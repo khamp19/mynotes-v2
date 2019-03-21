@@ -15,6 +15,7 @@ import NoteDetail from './Components/Notes/NoteDetail';
 import EditNote from './Components/Notes/EditNote';
 import AddNote from './Components/Notes/AddNote';
 import Register from  './Components/Authentication/register';
+import Login from './Components/Authentication/login';
 import UserDashboard from './Components/Users/UserDashboard';
 import UserNav from './Components/Users/UserNav';
 
@@ -29,6 +30,7 @@ ReactDOM.render(
         <Route exact path='/' component={App} />
         <Route path='/new-note' component={AddNote} />
         <Route path='/register' component={Register} />
+        <Route path='/login' component={Login} />
         <Route exact path='/notes' component={AllNotes} />
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route path='/notes/:id/update' component={EditNote} />
