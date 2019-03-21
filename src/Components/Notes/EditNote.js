@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getNote } from '../../Actions/NotesActions';
 //import update note action
@@ -18,6 +19,10 @@ class EditNote extends Component {
 
   componentDidMount(){
     this.props.getNote(this.props.match.params.id);
+    this.setState({
+      title: this.props.note.title,
+      content: this.props.note.content,
+    })
   }
 
   handleInput = (e) => {
@@ -38,7 +43,22 @@ class EditNote extends Component {
   render() {
     console.log('update note props', this.props.note);
     const { title, content } = this.state;
-    // console.log('update note state', this.state);
+    let note_id = '';
+    if(this.props.note){
+      note_id = this.props.note.id 
+    }
+
+    const loggedInUser = localStorage.getItem('username');
+    if(this.props.note.username !== loggedInUser){
+      return(
+        <div>
+         <p>you must be logged in to edit this note</p>
+          <Link to={`/notes/${note_id}`}>
+            <button>Back</button>
+          </Link>
+        </div> 
+      )
+    }
 
     return(
       <div>
@@ -67,7 +87,9 @@ class EditNote extends Component {
         </div>
         <div>
           <button onClick={this.updateNote}>Update Note</button>
-          <button>Back</button>
+          <Link to={`/notes/${note_id}`}>
+            <button>Back</button>
+          </Link>
         </div>
       </div>
     )

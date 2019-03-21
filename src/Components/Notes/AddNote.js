@@ -27,6 +27,7 @@ class AddNote extends Component {
   saveNote = (e) => {
     e.preventDefault();
     const newNote = {
+      username: localStorage.getItem('username'),
       title: this.state.title,
       content: this.state.content,
     }
@@ -39,6 +40,7 @@ class AddNote extends Component {
       title: '',
       content: '',
     })
+    this.props.history.push('/notes');
   }
 
   render() {

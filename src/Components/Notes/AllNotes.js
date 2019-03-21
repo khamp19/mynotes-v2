@@ -23,19 +23,17 @@ class AllNotes extends Component {
         <div>
           {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
           {this.props.notes_error ? <h3>Cannot get notes</h3> : null}
-          {this.props.notes.map((note, i) => {
+          <ul>
+            {this.props.notes.map((note, i) => {
               return (
-                <div>
-                  <ul>
-                    <li key={i}>
-                      <Link to={`/notes/${note._id}`}>
-                        <h3>{note.title}</h3>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              )
-            })}
+                  <li key={i}>
+                    <Link to={`/notes/${note._id}`}>
+                      <h3>{note.title}</h3>
+                    </Link>
+                  </li>
+                  )
+              })}
+          </ul>
         </div>
       </div>
     )

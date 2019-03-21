@@ -4,18 +4,30 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import { getNote } from '../../Actions/NotesActions';
+import { getUser } from '../../Actions/AuthActions';
 
 //needs edit and delete functions as buttons
 //link the home button back to the homepage
 
 class NoteDetail extends Component {
-  componentDidMount() {
-    this.props.getNote(this.props.match.params.id);
+  state = {
+    showNoteTools: false,
+    loggedIn: this.props.loggedIn,
   }
 
+  componentDidMount() {
+    this.props.getNote(this.props.match.params.id);
+    this.props.getUser();
+  }
+
+  credCheck = (e) => {
+    this.props.getUser();
+  }
+  
   render() {
-    const { title, content, created_at } = this.props.note;
+    const { title, content, created_at, username } = this.props.note;
     const note_id = this.props.match.params.id;
+    const loggedInUser = localStorage.getItem('username');
     
     let date = String(created_at);
     date = date.substr(0, 10);
@@ -29,20 +41,31 @@ class NoteDetail extends Component {
             <div>
               <div>
                 <h3>title: {title}</h3>
-                <p>{date}</p>
+                <p>created on: {date}</p>
               </div>
               <div>
                 <p>content: {content}</p>
               </div>
+              <p>created by: {username}</p>
               <div>
-                <Link to={`/notes/${note_id}/update`} >
-                  <button>Edit Note</button>
-                </Link>
-                <button>Delete Note</button>
+                {loggedInUser === username ? 
+                  <div>
+                    <Link to={`/notes/${note_id}/update`} >
+                      <button>Edit Note</button>
+                    </Link>
+                    <button>Delete Note</button>
+                  </div>
+                  : <p>Please log in to edit or delete this note</p>
+                }
               </div>
             </div>
             : null
           }
+        </div>
+        <div>
+          <Link to='/notes'>
+            <button>Back</button>
+          </Link>
         </div>
       </div>
     )
@@ -58,5 +81,18 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { getNote })(NoteDetail);
+export default connect(mapStateToProps, { getNote, getUser })(NoteDetail);
+
+// {
+//   if (loggedInUser === { username }) {
+//     return (
+//       <div>
+//         <Link to={`/notes/${note_id}/update`} >
+//           <button>Edit Note</button>
+//         </Link>
+//         <button>Delete Note</button>
+//       </div>
+//     )
+//   }
+// }
 

@@ -11,6 +11,7 @@ const defaultState = {
   getting_user: false,
   loggedIn: false,
   username: '',
+  userNotes: [],
   auth_error: '',
   loggingOut: false,
 };

@@ -36,6 +36,7 @@ const SelectedNoteReducer = (state = defaultState, action) => {
           title: action.note.title,
           content: action.note.content,
           created_at: action.note.created_at,
+          username: action.note.username
         })
       })
     case NOTE_ERROR:

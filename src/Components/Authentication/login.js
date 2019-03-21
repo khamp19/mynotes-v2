@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import Logout from './logout';
 import { getUser } from '../../Actions/AuthActions';
 
 // import login action
@@ -19,19 +18,9 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      loggedIn: false,
     }
   }
-
-  // componentDidMount() {
-  //   this.checkLogInStatus();
-  // }
-
-  // checkLogInStatus = () => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     this.setState({ loggedIn: true })
-  //   }
-  // }
 
   handleInput = (e) => {
     this.setState({
@@ -45,19 +34,18 @@ class Login extends Component {
     this.setState({ username: username });
     axios.put('https://lit-lake-67095.herokuapp.com/user/login', this.state)
       .then(res => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.username);
         this.setState({
-          token: res.data.token,
           loggedIn: true,
         })
-        localStorage.setItem("token", this.state.token);
-        localStorage.setItem("username", this.state.username);
+        this.props.getUser();
       })
+      .catch(err => console.log(err))
     this.setState({
       username: '',
       password: ''
     })
-    //REDUX: call login action function here
-    // this.props.getUser();
   }
 
 
@@ -93,8 +81,9 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    username: state.username,
-    password: state.password
+    // username: state.username,
+    // password: state.password,
+    loggedIn: state.AuthReducer.loggedIn,
   }
 }
 
