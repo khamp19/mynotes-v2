@@ -57,3 +57,19 @@ export const addNote = (noteData) => {
     })
   }
 }
+
+export const updateNote = (noteData, id) => {
+  const token = localStorage.getItem('token');
+  return dispatch => {
+    dispatch({ type: SAVING });
+    axios.put(`${DATA_URL}/notes/${id}`, noteData, { headers: { Authorization: token }})
+      .then((res) => {
+        console.log('note update successful', res.data);
+        dispatch({ type: NOTE, note: res.data});
+      })
+      .catch((err)=> {
+        console.log('error updating', err);
+        dispatch({ type: SAVE_ERROR });
+      })
+  }
+}

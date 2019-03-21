@@ -21,10 +21,6 @@ class UserNav extends Component {
     // this.setState({ loggedIn: this.props.loggedIn })
   }
 
-  redir = () => {
-    this.props.history.push('/');
-  }
-  
   //update logged in status here to render right element
   render(){
     if (this.props.loggedIn === false) {

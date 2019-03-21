@@ -10,24 +10,18 @@ import { getUser } from '../../Actions/AuthActions';
 //link the home button back to the homepage
 
 class NoteDetail extends Component {
-  state = {
-    showNoteTools: false,
-    loggedIn: this.props.loggedIn,
-  }
-
   componentDidMount() {
     this.props.getNote(this.props.match.params.id);
     this.props.getUser();
   }
 
-  credCheck = (e) => {
-    this.props.getUser();
-  }
-  
   render() {
     const { title, content, created_at, username } = this.props.note;
     const note_id = this.props.match.params.id;
-    const loggedInUser = localStorage.getItem('username');
+    let loggedInUser = localStorage.getItem('username');
+    // if(this.props.username){
+    //   loggedInUser = this.props.username;
+    // }
     
     let date = String(created_at);
     date = date.substr(0, 10);
@@ -83,16 +77,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { getNote, getUser })(NoteDetail);
 
-// {
-//   if (loggedInUser === { username }) {
-//     return (
-//       <div>
-//         <Link to={`/notes/${note_id}/update`} >
-//           <button>Edit Note</button>
-//         </Link>
-//         <button>Delete Note</button>
-//       </div>
-//     )
-//   }
-// }
 
