@@ -13,14 +13,14 @@ export const MAKE_USER_ERROR = 'MAKE_USER_ERROR';
 export const addUser = (userData) => {
   return dispatch => {
     dispatch({ type: MAKE_USER })
-    axios.post('https://lit-lake-67095.herokuapp.com/user/register', userData)
+    axios.post(`${backend_url}/user/register`, userData)
     .then(res => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.username);
       dispatch({
         type: AUTHENTICATED,
         username: res.data.username,
-        // userNotes: res.data.userNotes,
+        userNotes: res.data.userNotes,
       })
     })
     .catch((error) => {
@@ -47,6 +47,29 @@ export const getUser = () => {
   }
 }
 
+export const GET_USER_NOTES = 'GET_USER_NOTES';
+export const USER_NOTES = 'USER_NOTES';
+export const USER_NOTES_ERROR = 'USER_NOTES_ERROR';
+export const getUserNotes = () => {
+  const token = localStorage.getItem('token');
+  return dispatch => {
+    dispatch({type: GET_USER_NOTES})
+    axios.get(`${backend_url}/user/dashboard`, {headers: { Authorization: token }})
+      .then(res => {
+        console.log('response');
+        dispatch({
+          type: USER_NOTES, 
+          userNotes: res.data, 
+          username: res.data
+        })
+      })
+      .catch(err => {
+        console.log('error getting notes', err);
+        dispatch({ type: USER_NOTES_ERROR})
+      })
+  }
+}
+
 //logUserIn (from login)
 //set received token to state and localStorage
 //set received username to localStorage
@@ -55,12 +78,13 @@ export const logUserIn = (userData) => {
     dispatch({ type: GET_USER })
     axios.put(`${backend_url}/user/login`, userData)
       .then(res => {
+        console.log('response', res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("username", res.data.username);
         dispatch({
           type: AUTHENTICATED, 
           username: res.data.username,
-          // userNotes: res.data.userNotes,
+          userNotes: res.data.userNotes,
         })
       })
       .catch((error) => {

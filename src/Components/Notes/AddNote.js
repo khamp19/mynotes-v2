@@ -7,6 +7,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 //import add note action
 import { addNote } from '../../Actions/NotesActions';
+import { getUser } from '../../Actions/AuthActions';
 
 class AddNote extends Component {
   constructor(props){
@@ -14,8 +15,16 @@ class AddNote extends Component {
     this.state = {
       title: '',
       content: '',
-      saved: false
+      saved: false,
+      loggedIn: false,
     }
+  }
+
+  componentDidMount() {
+    this.props.getUser();
+    setTimeout(() => {
+      this.setState({ loggedIn: this.props.loggedIn});
+    }, 100);
   }
 
   handleInput = (e) => {
@@ -35,22 +44,32 @@ class AddNote extends Component {
     //   alert 'please add a title'
     // }
     this.props.addNote(newNote);
-    this.setState({
-      saved: true,
-      title: '',
-      content: '',
-    })
-    this.props.history.push('/notes');
+    // setTimeout(()=> {
+    //   this.setState({
+    //     saved: true,
+    //     title: '',
+    //     content: '',
+    //     // note_id: this.props.note.id
+    //   })
+    //   this.props.match.params.id = this.props.note.id;
+    // }, 500)
+    this.props.history.push('/notes/');
   }
 
   render() {
+    if(this.state.loggedIn === false){
+      return(
+        <div>
+          <p>Please log in to create a note</p>
+        </div>
+      )
+    }
     // if(this.state.saved === true) {
-    //   const {id} = this.props.note._id;
-    //   return <Redirect to={`/notes/${id}`} />
+    //   const { id } = this.props.match.params.id;
+    //   return <Redirect to={`/notes/${this.props.match.params.id}`} />
     // }
 
     const { title, content } = this.state;
-    //if saved = true Redirect here
     return (
       <div>
         <div>
@@ -86,14 +105,8 @@ const mapStateToProps = state => {
     saving: state.SelectedNoteReducer.saving,
     error: state.SelectedNoteReducer.save_error,
     note: state.SelectedNoteReducer.note,
+    loggedIn: state.AuthReducer.loggedIn,
   }
 }
 
-export default connect(mapStateToProps, { addNote })(AddNote);
-
-// <div>
-//   {this.props.note ?
-//     <Redirect to={`/notes/${this.props.note._id}`} />
-//     : <Redirect to={'/notes'} />
-//   }
-// </div>
+export default connect(mapStateToProps, { addNote, getUser })(AddNote);

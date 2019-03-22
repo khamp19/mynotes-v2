@@ -5,6 +5,9 @@ import {
   GET_USER,
   AUTHENTICATED,
   AUTH_ERROR,
+  GET_USER_NOTES,
+  USER_NOTES,
+  USER_NOTES_ERROR,
   LOGGING_OUT,
   LOG_OUT_SUCCESS
 } from '../Actions/AuthActions';
@@ -49,6 +52,22 @@ const AuthReducer = (state = defaultState, action) => {
       return Object.assign({}, state, {
         getting_user: false,
         error: 'no user found, please log in'
+      });
+    case GET_USER_NOTES:
+      return Object.assign({}, state, {
+        getting_user: true,
+      });
+    case USER_NOTES:
+      return Object.assign({}, state, {
+        getting_user: false,
+        loggedIn: true,
+        username: state.username.concat(action.username),
+        userNotes: state.userNotes.push(action.userNotes),
+      });
+    case USER_NOTES_ERROR:
+      return Object.assign({}, state, {
+        getting_user: false,
+        auth_error: '',
       });
     case LOGGING_OUT:
       return Object.assign({}, state, {

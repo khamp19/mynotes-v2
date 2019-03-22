@@ -74,3 +74,20 @@ export const updateNote = (id, noteData) => {
   }
 }
 
+export const DELETING_NOTE = 'DELETING_NOTE';
+export const DELETE_NOTE_ERROR = 'DELETE_NOTE_ERROR';
+export const deleteNote = (id) => {
+  const token = localStorage.getItem('token');
+  return dispatch => {
+    dispatch({type: DELETING_NOTE})
+    axios.delete(`${DATA_URL}/notes/${id}`, { headers: { Authorization: token } })
+      .then((res) => {
+        console.log('delete successfull');
+        dispatch({type: NOTE, note: res.data});
+      })
+      .catch((err) => {
+        console.log('error deleting note', err);
+        dispatch({ type: DELETE_NOTE_ERROR})
+      })
+  }
+}

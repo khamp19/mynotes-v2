@@ -16,7 +16,7 @@ import EditNote from './Components/Notes/EditNote';
 import AddNote from './Components/Notes/AddNote';
 import Register from  './Components/Authentication/register';
 import Login from './Components/Authentication/login';
-import UserDashboard from './Components/Users/UserDashboard';
+// import UserDashboard from './Components/Users/UserDashboard';
 import UserNav from './Components/Users/UserNav';
 
 const middleware = applyMiddleware(thunk, logger);
@@ -26,15 +26,16 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <UserNav />
+        <header>
+          <UserNav />
+        </header>
         <Route exact path='/' component={App} />
         <Route path='/new-note' component={AddNote} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
         <Route exact path='/notes' component={AllNotes} />
-        <Route exact path='/notes/:id' component={NoteDetail} />
+        <Route path='/notes/:id' component={NoteDetail} />
         <Route path='/notes/:id/update' component={EditNote} />
-        <Route exact path='/dashboard' component={UserDashboard} />
       </div>
     </Router>
   </Provider>

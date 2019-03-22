@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import { getNote } from '../../Actions/NotesActions';
+import { getNote, deleteNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
 
 //needs edit and delete functions as buttons
@@ -13,6 +13,13 @@ class NoteDetail extends Component {
   componentDidMount() {
     this.props.getNote(this.props.match.params.id);
     this.props.getUser();
+  }
+
+  deleteNote = () => {
+    const note_id = this.props.match.params.id;
+    console.log('note id', note_id);
+    this.props.deleteNote(note_id);
+    this.props.history.push('/notes');
   }
 
   render() {
@@ -47,7 +54,10 @@ class NoteDetail extends Component {
                     <Link to={`/notes/${note_id}/update`} >
                       <button>Edit Note</button>
                     </Link>
-                    <button>Delete Note</button>
+                    <button 
+                      onClick={this.deleteNote}>
+                      Delete Note
+                    </button>
                   </div>
                   : <p>Please log in to edit or delete this note</p>
                 }
@@ -75,6 +85,6 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { getNote, getUser })(NoteDetail);
+export default connect(mapStateToProps, { getNote, getUser, deleteNote })(NoteDetail);
 
 

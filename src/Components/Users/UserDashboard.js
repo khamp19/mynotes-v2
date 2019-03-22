@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 //import actions 
-import { getUser } from '../../Actions/AuthActions';
+import { getUser, getUserNotes } from '../../Actions/AuthActions';
 //action for getting the notes of the user
  
 //get all notes, then filter by username?
@@ -19,13 +19,16 @@ class UserDashboard extends Component {
 
   componentDidMount(){
     this.props.getUser();
-    this.setState({
-      loggedIn: this.props.loggedIn,
-      username: this.props.username,
-      // username: this.props.user.username,
-      // notes: this.props.user.notes,
+    this.props.getUserNotes();
+    setTimeout(() => {
+      this.setState({
+        loggedIn: this.props.loggedIn,
+        username: this.props.username,
+        userNotes: this.props.userNotes,
+        // username: this.props.user.username,
+        // notes: this.props.user.notes,
+      })
     })
-    console.log('dahsboard props', this.props);
   }
 
   render(){
@@ -40,7 +43,19 @@ class UserDashboard extends Component {
     //if logged in, return the profile info for the user
       //and an array of their notes
     return(
-      <div>hello from UserDashboard </div>
+      <div>
+        <p>Welcome to Your Dashboard</p>
+        <div>
+          <h3>Your Notes</h3>
+          <div>
+            {this.state.userNotes.map((note, i) => {
+              return (
+                <li key={i}>{note._id}</li>
+              )
+            })}
+          </div>
+        </div>
+      </div>
     )
   }
 }
@@ -48,9 +63,9 @@ class UserDashboard extends Component {
 const mapStateToProps = state => {
   return {
     username: state.AuthReducer.username,
-    // password: state.password,
-    // loggedIn: state.AuthReducer.loggedIn,
+    loggedIn: state.AuthReducer.loggedIn,
+    userNotes: state.AuthReducer.userNotes,
   }
 }
 
-export default connect(mapStateToProps, { getUser })(UserDashboard);
+export default connect(mapStateToProps, { getUser, getUserNotes })(UserDashboard);

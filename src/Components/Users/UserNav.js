@@ -24,11 +24,13 @@ class UserNav extends Component {
   //update logged in status here to render right element
   render(){
     if (this.props.loggedIn === false) {
-      // return <Login />
       return (
         <div>
           <Link to='/login'>
             <button>Login</button>
+          </Link>
+          <Link to='/notes'>
+            <button>Notes</button>
           </Link>
         </div>
       )
@@ -39,9 +41,6 @@ class UserNav extends Component {
         <p>Logged into User Navbar</p>
         <Link to='/notes'>
           <button>Notes</button>
-        </Link>
-        <Link to='/dashboard'>
-          <button>Dashboard</button>
         </Link>
         <Logout />
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getNote, updateNote } from '../../Actions/NotesActions';
+import { getNote, updateNote, deleteNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
 
 class EditNote extends Component {
@@ -49,6 +49,13 @@ class EditNote extends Component {
     setTimeout(()=> {
       this.props.history.push(`/notes/${id}`);
     }, 500);
+  }
+
+  deleteNote = () => {
+    const note_id = this.props.match.params.id;
+    console.log('note id', note_id);
+    this.props.deleteNote(note_id);
+    this.props.history.push('/notes');
   }
 
   render() {
@@ -108,6 +115,7 @@ class EditNote extends Component {
                 onChange={this.handleInput}
               />
               <button onClick={this.updateNote}>Update Note</button>
+              <button onClick={this.deleteNote}>Delete Note</button>
             </form>
           </div>
           : null}
@@ -132,5 +140,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getNote, getUser, updateNote })(EditNote);
+export default connect(mapStateToProps, { getNote, getUser, updateNote, deleteNote })(EditNote);
 
