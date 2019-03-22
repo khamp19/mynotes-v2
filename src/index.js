@@ -34,8 +34,8 @@ ReactDOM.render(
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
         <Route exact path='/notes' component={AllNotes} />
-        <Route path='/notes/:id' component={NoteDetail} />
-        <Route path='/notes/:id/update' component={EditNote} />
+        <Route exact path='/notes/:id' component={NoteDetail} />
+        <Route exact path='/notes/:id/update' component={EditNote} />
       </div>
     </Router>
   </Provider>
