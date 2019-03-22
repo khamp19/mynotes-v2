@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { logUserIn, getUser } from '../../Actions/AuthActions';
 import Redirect from 'react-router-dom/Redirect';
+import './login.css';
+import { logUserIn, getUser } from '../../Actions/AuthActions';
 
 //allow user to send username and password to backend
 class Login extends Component {
@@ -39,7 +39,7 @@ class Login extends Component {
     this.props.logUserIn(this.state);
     setTimeout(()=>{
       this.setState({loggedIn: this.props.loggedIn})
-    }, 500)
+    }, 300)
     this.setState({
       username: '',
       password: ''
@@ -54,9 +54,9 @@ class Login extends Component {
 
     const { username, password } = this.state;
     return (
-      <div>
-        <h2>please log in</h2>
-        <div>
+      <div className="login-container">
+        <h3>please log in</h3>
+        <div className="login">
           <form onSubmit={this.LogIn}>
             <input
               placeholder="username"
@@ -72,8 +72,12 @@ class Login extends Component {
               value={password}
               onChange={this.handleInput}
             />
-            <button onClick={this.LogIn}>Log In</button>
-          </form>
+            </form>
+            <button 
+              className="login-user-button" 
+              onClick={this.LogIn}>
+              Log In
+            </button>
         </div>
       </div>
     )

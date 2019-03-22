@@ -8,6 +8,7 @@ import { Redirect, Link } from 'react-router-dom';
 //import add note action
 import { addNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
+import './addNote.css';
 
 class AddNote extends Component {
   constructor(props){
@@ -59,7 +60,7 @@ class AddNote extends Component {
   render() {
     if(this.state.loggedIn === false){
       return(
-        <div>
+        <div className="add-note-container">
           <p>Please log in to create a note</p>
         </div>
       )
@@ -71,28 +72,39 @@ class AddNote extends Component {
 
     const { title, content } = this.state;
     return (
-      <div>
+      <div className="add-note-container">
         <div>
-          <p>Add New Note</p>
-          <div>
+          <h3>Add New Note</h3>
+          <div >
             <form onSubmit={this.saveNote}>
               <input 
-                className="new-note-title"
+                className="note-title"
                 name="title"
                 type="text"
                 placeholder="title"
                 value={title}
                 onChange={this.handleInput} />
-              <input 
-                className="new-note-content"
-                name="content"
-                type="text"
-                placeholder="add content here"
-                value={content}
-                onChange={this.handleInput} />
+              <div className="text-box">
+                <textarea 
+                  className="note-content"
+                  name="content"
+                  type="text"
+                  placeholder="add content here"
+                  value={content}
+                  onChange={this.handleInput}>
+                </textarea>
+              </div>
             </form>
-            <button onClick={this.saveNote}>Save Note</button>
-            <Link to='/notes'><button>Back</button></Link>
+            <div className="button-container">
+              <button 
+                  className="green-button"
+                  onClick={this.saveNote}>
+                  Save Note
+                </button>
+              <Link to='/notes'>
+                <button className="nav-button">Back</button>
+              </Link>
+            </div>
           </div>
         </div>        
       </div>

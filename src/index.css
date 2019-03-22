@@ -25,6 +25,7 @@ time, mark, audio, video {
   font-family: 'Courier New', Courier, monospace;
 	font: inherit;
 	vertical-align: baseline;
+	text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -32,9 +33,13 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+	line-height: 1.2;
+	font-size: 120%;
 	box-sizing: border-box;
-}
+	background-color: #5aa6a2;
+	font-family: 'Courier New', Courier, monospace;
+	margin-bottom: 200px;
+}	
 ol, ul {
 	list-style: none;
 }
@@ -49,4 +54,75 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.nav-button {
+	background-color: #bdbdc6;
+  width: 100px;
+}
+.nav-button:hover {
+	background-color: #4f4cb5;
+	color: #ebebeb;
+}
+
+.button-container {
+  /* border: 1px solid orange; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.red-button {
+	background-color: firebrick;
+	width: 100px;
+	color: #ebebeb;
+}
+
+.green-button {
+	background-color: #00c300;
+	width: 100px;
+}
+
+.note-title {
+	width: 400px;
+}
+
+.text-box{
+	margin: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.note-content {
+	padding: 5px;
+	margin: auto;
+	width: 400px;
+	height: 200px;
+	align-self: flex-start;
+	flex-wrap: wrap;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: #ebebeb;
+	background-color: #213d3b;
+	height: 75px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+footer p {
+	margin: 15px;
+}
+
+footer a {
+	color: #ebebeb;
+	background-color: #5aa6a2;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
 }

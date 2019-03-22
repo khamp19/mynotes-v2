@@ -2,47 +2,48 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-//import actions
 import { getUser } from '../../Actions/AuthActions';
 
-//import components
-// import Login from '../Authentication/login';
 import Logout from '../Authentication/logout';
-
+import './userNav.css';
 //user navigation navbar
 //if not logged in, shows login option
 //if logged in has links to user dashboard, create note, and logout button
 
 class UserNav extends Component {
 
-  //use component did mount to get loggedIn status from redux store
   componentDidMount() {
     this.props.getUser();
     // this.setState({ loggedIn: this.props.loggedIn })
   }
 
-  //update logged in status here to render right element
   render(){
     if (this.props.loggedIn === false) {
       return (
-        <div>
-          <Link to='/login'>
-            <button>Login</button>
-          </Link>
-          <Link to='/notes'>
-            <button>Notes</button>
-          </Link>
+        <div className="user-nav-container">
+          <div className="button-container">
+            <Link to='/login'>
+              <button className="nav-button">Login</button>
+            </Link>
+            <Link to='/notes'>
+              <button className="nav-button">Notes</button>
+            </Link>
+            <Link to='/register'>
+              <button className="nav-button">Register</button>
+            </Link>
+          </div>
         </div>
       )
     }
 
     return(
-      <div>
-        <p>Logged into User Navbar</p>
-        <Link to='/notes'>
-          <button>Notes</button>
-        </Link>
-        <Logout />
+      <div className="user-nav-container">
+        <div className="button-container">
+          <Link to='/notes'>
+            <button className="nav-button">Notes</button>
+          </Link>
+          <Logout />
+        </div>
       </div>
     )
   }

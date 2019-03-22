@@ -1,0 +1,18 @@
+.user-nav-container {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  border-bottom: 3px solid #3f3e52;
+  background-color: #4c4b63;
+  height: 100px;
+  display: flex;
+}
+
+/* .button-container {
+  border: 1px solid orange;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+} */

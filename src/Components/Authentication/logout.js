@@ -26,7 +26,9 @@ class LogoutButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.logMeOut.bind(this)}>
+        <button 
+          className="red-button" 
+          onClick={this.logMeOut.bind(this)}>
           Log Out
         </button>
       </div>

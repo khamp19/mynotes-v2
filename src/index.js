@@ -30,26 +30,21 @@ ReactDOM.render(
           <UserNav />
         </header>
         <Route exact path='/' component={App} />
-        <Route path='/new-note' component={AddNote} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
+        <Route path='/new-note' component={AddNote} />
         <Route exact path='/notes' component={AllNotes} />
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route exact path='/notes/:id/update' component={EditNote} />
+        <footer>
+          <p>
+            <a href="https://github.com/khamp19/mynotes-v2" target="_blank" rel="noopener noreferrer"> Frontend Repo </a>
+          </p>
+          <p>
+            <a href="https://github.com/khamp19/notes_project_II" target="_blank" rel="noopener noreferrer"> Backend Repo </a>
+          </p>
+        </footer>
       </div>
     </Router>
   </Provider>
   , document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
-
-/*
-Not sure I want to do this this way bc of authentication
-<Route path='/notes' component={AllNotes} />
-
-Other Routes:
-<Route path='/notes/new-note' component={NewNote} />
-*/

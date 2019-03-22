@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-
 import { getAllNotes } from '../../Actions/NotesActions';
-
+import './allNotes.css';
 
 class AllNotes extends Component {
   componentDidMount() {
@@ -13,13 +11,14 @@ class AllNotes extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="allnotes-container">
+        <div className="text-container">
+          <h2>Here are All Notes</h2>
+          <p>Click on the note title to access note content</p>
           <Link to={`/new-note`}>
-            <button>Add New Note</button>
+            <button className="nav-button">Add New Note</button>
           </Link>
         </div>
-        <h2>Here are All Notes</h2>
         <div>
           {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
           {this.props.notes_error ? <h3>Cannot get notes</h3> : null}
@@ -28,7 +27,7 @@ class AllNotes extends Component {
               return (
                   <li key={i}>
                     <Link to={`/notes/${note._id}`}>
-                      <h3>{note.title}</h3>
+                      <h4>{note.title}</h4>
                     </Link>
                   </li>
                   )

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { getNote, deleteNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
+import './noteDetail.css';
 
 //needs edit and delete functions as buttons
 //link the home button back to the homepage
@@ -35,40 +36,40 @@ class NoteDetail extends Component {
     date = moment(date, "YYYY-MM-DD").format("MMM Do YYYY");
 
     return (
-      <div>
+      <div className="note-detail-container">
         <div>
           {this.props.error ? <h4>Error getting this note</h4> : null}
           {this.props.note ? 
-            <div>
+            <div className="note-info">
               <div>
-                <h3>title: {title}</h3>
-                <p>created on: {date}</p>
+                <h3>{title}</h3>
               </div>
               <div>
-                <p>content: {content}</p>
+                <p>{content}</p>
               </div>
-              <p>created by: {username}</p>
-              <div>
-                {loggedInUser === username ? 
-                  <div>
-                    <Link to={`/notes/${note_id}/update`} >
-                      <button>Edit Note</button>
-                    </Link>
-                    <button 
-                      onClick={this.deleteNote}>
-                      Delete Note
-                    </button>
-                  </div>
-                  : <p>Please log in to edit or delete this note</p>
-                }
-              </div>
+                <p>created by {username} on {date}</p>
             </div>
             : null
           }
         </div>
-        <div>
+        <div className="button-container">
+          <div>
+            {loggedInUser === username ?
+              <div>
+                <Link to={`/notes/${note_id}/update`} >
+                  <button className="green-button">Edit Note</button>
+                </Link>
+                <button
+                  className="red-button"
+                  onClick={this.deleteNote}>
+                  Delete Note
+                    </button>
+              </div>
+              : <p>Please log in as {username} to edit or delete this note</p>
+            }
+          </div>
           <Link to='/notes'>
-            <button>Back</button>
+            <button className="nav-button">Back</button>
           </Link>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addUser, getUser } from '../../Actions/AuthActions';
-
+import './register.css';
 //should let user create un and pw
 //should save un and pw to backend
 //should get a token from the backend
@@ -55,12 +55,11 @@ class Register extends Component {
       return <Redirect to='/notes' />
     }
     return (
-      <div>
-        <p>hello from Register</p>
-        <p>please create a username and password</p>
-        <div>
+      <div className="reg-container">
+        <h3>please create a username and password</h3>
+        <div className="registration">
           <form onSubmit={this.createUser}>
-            <input
+            <input 
               name="username"
               type="text"
               placeholder="username"
@@ -73,7 +72,10 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.handleInput} />
           </form>
-          <button onClick={this.createUser}>Create User</button>
+          <button className="create-user-button"
+            onClick={this.createUser}>
+            Create User
+          </button>
         </div>
       </div>
     )

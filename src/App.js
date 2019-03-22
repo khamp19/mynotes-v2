@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import logo from './logo.svg';
+import { Redirect } from 'react-router-dom';
+// import logo from './logo.svg';
 import './App.css';
 import { getUser } from './Actions/AuthActions';
 import LandingPage from './Components/landingPage';
-import Register from './Components/Authentication/register';
 
 
 class App extends Component {
+  state = {
+    loggedIn: false,
+  }
+
   componentDidMount() {
-    // this.props.getUser();
+    this.props.getUser();
+    setTimeout(() => {
+      this.setState({loggedIn: this.props.loggedIn});
+    }, 50)
   }
   
   render() {
+    if(this.state.loggedIn === true){
+      return <Redirect to='/notes' />
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>App under construction</p>
-        </header>
         <div>
           <LandingPage />
-        </div>
-        <Register />
-        <div>
         </div>
       </div>
     );
