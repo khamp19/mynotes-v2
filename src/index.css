@@ -133,3 +133,11 @@ footer button {
 	background-color: #5aa6a2;
 	font-size: 80%;
 }
+
+@media (max-width: 768px) {
+
+}
+  
+@media (max-width: 400px) {
+
+}

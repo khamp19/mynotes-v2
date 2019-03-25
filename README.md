@@ -1,3 +1,9 @@
+## My Note-Taking App
+Thanks for looking at my project!
+This is the frontend of my note-taking app, built with React and Redux. You can view the app here[https://takenote.netlify.com/]. You can view the repo for the backend here[https://github.com/khamp19/notes_project_II].
+
+To run the app locally, please follow the instructions below.
+---------------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
