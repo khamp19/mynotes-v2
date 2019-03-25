@@ -4,10 +4,11 @@
   margin-right: auto;
   width: 80%;
   max-width: 800px;
-  height: 400px;
   border: 1px solid #d2e6e5;
   background-color: #d2e6e5;
   border-radius: 5px;
+  padding: 20px;
+  padding-bottom: 30px;
 }
 
 .note-info {

@@ -37,12 +37,12 @@ ReactDOM.render(
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route exact path='/notes/:id/update' component={EditNote} />
         <footer>
-          <p>
+          <button>
             <a href="https://github.com/khamp19/mynotes-v2" target="_blank" rel="noopener noreferrer"> Frontend Repo </a>
-          </p>
-          <p>
+          </button>
+          <button>
             <a href="https://github.com/khamp19/notes_project_II" target="_blank" rel="noopener noreferrer"> Backend Repo </a>
-          </p>
+          </button>
         </footer>
       </div>
     </Router>
