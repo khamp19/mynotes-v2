@@ -1,8 +1,8 @@
 .allnotes-container {
+  /* border: 3px solid black; */
   margin: auto;
   max-width: 900px;
   width: 80%;
-  /* border: 3px solid black; */
   margin-top: 120px;
   background-color: #5aa6a2;
 }
@@ -48,4 +48,18 @@
 
 .allnotes-container li:hover {
   background-color: #4c4b63;
+}
+
+@media (max-width: 600px) {
+  .allnotes-container li {
+    width: 45%;
+  }
+}
+  
+@media (max-width: 408px) {
+  .allnotes-container li {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }

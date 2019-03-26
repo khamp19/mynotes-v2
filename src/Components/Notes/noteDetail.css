@@ -18,3 +18,14 @@
   padding: 10px;
   text-align: center;
 }
+
+
+/* @media (max-width: 600px) {
+
+} */
+  
+@media (max-width: 408px) {
+  .note-detail-container {
+    width: 90%;
+  }
+}

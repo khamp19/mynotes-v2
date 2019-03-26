@@ -95,14 +95,14 @@ class AddNote extends Component {
                 </textarea>
               </div>
             </form>
-            <div className="button-container">
+            <div className="button-container button-tools">
               <button 
-                  className="green-button"
+                  className="green-button bt"
                   onClick={this.saveNote}>
-                  Save Note
+                  Save
                 </button>
               <Link to='/notes'>
-                <button className="nav-button">Back</button>
+                <button className="nav-button bt">Back</button>
               </Link>
             </div>
           </div>

@@ -119,23 +119,23 @@ class EditNote extends Component {
           </div>
           : null}
         </div>
-        <div className="button-container">
+        <div className="button-container button-tools">
           {this.props.note.username === loggedInUser ?
             <div>
               <button
-                className="green-button"
+                className="green-button bt"
                 onClick={this.updateNote}>
-                Update Note
+                Update
               </button>
               <button
-                className="red-button"
+                className="red-button bt"
                 onClick={this.deleteNote}>
-                Delete Note
+                Delete
               </button>
             </div>
             : <p>Please log in to edit or delete this note</p> }
           <Link to={`/notes/${note_id}`}>
-            <button className="nav-button">Back</button>
+            <button className="nav-button bt">Back</button>
           </Link>
         </div>
       </div>

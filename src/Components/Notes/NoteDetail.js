@@ -52,24 +52,20 @@ class NoteDetail extends Component {
             : null
           }
         </div>
-        <div className="button-container">
+        <div className="button-container button-tools">
           <div>
             {loggedInUser === username ?
               <div>
                 <Link to={`/notes/${note_id}/update`} >
-                  <button className="green-button">Edit Note</button>
+                  <button className="green-button bt">Edit</button>
                 </Link>
-                <button
-                  className="red-button"
-                  onClick={this.deleteNote}>
-                  Delete Note
-                    </button>
+                <button className="red-button bt" onClick={this.deleteNote}>Delete</button>
               </div>
               : <p>Please log in as {username} to edit or delete this note</p>
             }
           </div>
           <Link to='/notes'>
-            <button className="nav-button">Back</button>
+            <button className="nav-button bt">Back</button>
           </Link>
         </div>
       </div>

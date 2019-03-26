@@ -63,28 +63,36 @@ button {
 .nav-button {
 	background-color: #bdbdc6;
 	width: 100px;
+	margin-top: 20px
 }
+
 .nav-button:hover {
 	background-color: #4f4cb5;
 	color: #ebebeb;
 }
 
 .button-container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 25px;
+	border: 1px solid blue;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin: 10px 0px;
+	/* padding: 10px; */
 }
 
 .red-button {
 	background-color: firebrick;
 	width: 100px;
 	color: #ebebeb;
+	margin-top: 20px;
 }
 
 .green-button {
 	background-color: #00c300;
 	width: 100px;
+	padding: 0px;
+	height: 32px;
+	margin-top: 20px;
 }
 
 .note-title {
@@ -113,31 +121,58 @@ footer {
 	width: 100%;
 	color: #ebebeb;
 	background-color: #213d3b;
-	height: 75px;
+	height: 90px;
 	display: flex;
 	justify-content: flex-end;
 }
 
-footer p {
-	margin: 15px;
+.button-container-bottom {
+	/* border: 1px solid orange; */
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin: 8px 0px;
 }
 
-footer a {
+.footer-nav-button {
+	width: 150px;
+	margin-top: 20px;
+}
+
+.footer-nav-button:hover {
+	background-color: #4f4cb5;
 	color: #ebebeb;
-	margin: 5px;
-	padding: 5px;
-	border-radius: 5px;
 }
 
-footer button {
-	background-color: #5aa6a2;
-	font-size: 80%;
-}
+/* @media (max-width: 768px) {
 
-@media (max-width: 768px) {
-
-}
+} */
   
-@media (max-width: 400px) {
+@media (max-width: 408px) {
+	.button-container {
+		justify-content: space-evenly;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.button-container-bottom {
+		justify-content: space-evenly;
+	}
+	.note-title {
+		width: 90%;
+	}
 
+	.note-content {
+		width: 90%;
+	}
+
+	.button-tools {
+		margin: auto;
+		width: 90%;
+		justify-content: center;
+		border: 3px solid red;
+	  }
+	  
+	  .bt {
+		width: 75px;
+	  }
 }

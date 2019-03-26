@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import './index.css';
 import App from './App';
@@ -37,12 +37,14 @@ ReactDOM.render(
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route exact path='/notes/:id/update' component={EditNote} />
         <footer>
-          <button>
-            <a href="https://github.com/khamp19/mynotes-v2" target="_blank" rel="noopener noreferrer"> Frontend Repo </a>
-          </button>
-          <button>
-            <a href="https://github.com/khamp19/notes_project_II" target="_blank" rel="noopener noreferrer"> Backend Repo </a>
-          </button>
+          <div className="button-container-bottom">
+            <Link to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
+              <button className="footer-nav-button">Frontend Repo</button>
+            </Link>
+            <Link to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
+              <button className="footer-nav-button">Backend Repo</button>
+            </Link>
+          </div>
         </footer>
       </div>
     </Router>
