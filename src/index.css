@@ -120,7 +120,7 @@ footer {
 	width: 100%;
 	color: #ebebeb;
 	background-color: #213d3b;
-	height: 90px;
+	/* height: 90px; */
 	display: flex;
 	justify-content: flex-end;
 }
