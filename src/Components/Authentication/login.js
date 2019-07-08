@@ -61,15 +61,15 @@ class Login extends Component {
   }
 
   //check login status
-  componentDidMount() {
-    this.props.getUser();
-    setTimeout(() => {
-      this.setState({
-        loggedIn: this.props.loggedIn,
-      });
-    }, 200)
+  async componentDidMount() {
+    await this.props.getUser();
   }
 
+  async componentDidUpdate(prevProps) {
+    if(this.props.loggedIn !== prevProps.loggedIn){
+      await this.props.getUser();
+    }
+  }
 
   handleInput = (e) => {
     this.setState({
@@ -83,9 +83,6 @@ class Login extends Component {
     let username = this.state.username.toLowerCase();
     this.setState({ username: username });
     this.props.logUserIn(this.state);
-    setTimeout(()=>{
-      this.setState({loggedIn: this.props.loggedIn})
-    }, 300)
     this.setState({
       username: '',
       password: ''
@@ -93,7 +90,7 @@ class Login extends Component {
   }
 
   render() {
-    if(this.state.loggedIn === true){
+    if(this.props.loggedIn === true){
       return <Redirect to='/notes' />
     }
 
@@ -179,8 +176,6 @@ Login.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    // username: state.username,
-    // password: state.password,
     loggedIn: state.AuthReducer.loggedIn,
   }
 }
