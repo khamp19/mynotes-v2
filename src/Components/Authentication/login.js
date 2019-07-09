@@ -23,6 +23,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     height: '100vh',
+    marginTop: '75px',
   },
   image: {
     backgroundImage: `url(${LoginImg})`,
@@ -38,7 +39,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#5aa6a2',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -134,10 +135,6 @@ class Login extends Component {
                   id="password"
                   value={password}
                   onChange={this.handleInput}
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
                 />
                 <Button
                   type="submit"

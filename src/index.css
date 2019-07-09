@@ -36,7 +36,7 @@ body {
 	line-height: 1.2;
 	font-size: 120%;
 	box-sizing: border-box;
-	background-color: #5aa6a2;
+	/* background-color: #5aa6a2; */
 	font-family: 'Courier New', Courier, monospace;
 	margin-bottom: 200px;
 }	
@@ -79,7 +79,7 @@ button {
 	/* padding: 10px; */
 }
 
-.red-button {
+/* .red-button {
 	background-color: firebrick;
 	width: 100px;
 	color: #ebebeb;
@@ -92,7 +92,7 @@ button {
 	padding: 0px;
 	height: 32px;
 	margin-top: 20px;
-}
+} */
 
 .note-title {
 	width: 400px;
@@ -114,19 +114,18 @@ button {
 	flex-wrap: wrap;
 }
 
-footer {
+/* footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	color: #ebebeb;
 	background-color: #213d3b;
-	/* height: 90px; */
+	height: 90px;
 	display: flex;
 	justify-content: flex-end;
-}
+} */
 
-.button-container-bottom {
-	/* border: 1px solid orange; */
+/* .button-container-bottom {
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
@@ -141,7 +140,7 @@ footer {
 .footer-nav-button:hover {
 	background-color: #4f4cb5;
 	color: #ebebeb;
-}
+} */
 
 /* @media (max-width: 768px) {
 

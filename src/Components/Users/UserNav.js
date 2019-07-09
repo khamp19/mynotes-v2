@@ -6,6 +6,9 @@ import { getUser } from '../../Actions/AuthActions';
 
 import Logout from '../Authentication/logout';
 // import './userNav.css';
+
+
+
 //user navigation navbar
 //if not logged in, shows login option
 //if logged in has links to user dashboard, create note, and logout button

@@ -18,7 +18,8 @@ import Register from  './Components/Authentication/register';
 import Login from './Components/Authentication/login';
 // import UserDashboard from './Components/Users/UserDashboard';
 import UserNav from './Components/Users/UserNav';
-import SignInSide from './Components/SignInTest';
+// import SignInSide from './Components/SignInTest';
+import NavBar from './Components/NavBar';
 
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(rootReducer, middleware);
@@ -28,7 +29,7 @@ ReactDOM.render(
     <Router>
       <div>
         <header>
-          <UserNav />
+          <NavBar />
         </header>
         <Route exact path='/' component={App} />
         <Route path='/register' component={Register} />
@@ -37,17 +38,6 @@ ReactDOM.render(
         <Route exact path='/notes' component={AllNotes} />
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route exact path='/notes/:id/update' component={EditNote} />
-        <Route exact path='/signin-test' component={SignInSide} />
-        <footer>
-          <div className="button-container-bottom">
-            <Link to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
-              <button className="footer-nav-button">Frontend Repo</button>
-            </Link>
-            <Link to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
-              <button className="footer-nav-button">Backend Repo</button>
-            </Link>
-          </div>
-        </footer>
       </div>
     </Router>
   </Provider>

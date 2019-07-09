@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
@@ -25,6 +24,7 @@ const styles = theme => ({
   },
   root: {
     height: '100vh',
+    marginTop: '30px',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -34,7 +34,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#5aa6a2',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -110,6 +110,7 @@ class Register extends Component {
           direction="column"
           alignItems="center"
           justify="center"
+          className={classes.root}
         >
           <CssBaseline />
           <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
@@ -118,7 +119,7 @@ class Register extends Component {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign up
+                Create an Account
               </Typography>
               <form className={classes.form} noValidate onSubmit={this.createUser}>
                 <TextField
@@ -177,4 +178,5 @@ const mapStateToProps = state => {
     loggedIn: state.AuthReducer.loggedIn,
   }
 }
+
 export default connect(mapStateToProps, { addUser, getUser })(withStyles(styles)(Register));

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllNotes } from '../../Actions/NotesActions';
-import './allNotes.css';
+// import './allNotes.css';
 
 class AllNotes extends Component {
   componentDidMount() {

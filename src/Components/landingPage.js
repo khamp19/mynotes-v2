@@ -1,5 +1,7 @@
 import React from 'react';
-import './landingpage.css';
+import { Link } from 'react-router-dom';
+// import './landingpage.css';
+
 
 const LandingPage = () => {
   return (
@@ -19,6 +21,16 @@ const LandingPage = () => {
         target="_blank" rel="noopener noreferrer">
         My (Original) Notes Project
       </a>
+      <footer>
+        <div className="button-container-bottom">
+          <Link to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
+            <button className="footer-nav-button">Frontend Repo</button>
+          </Link>
+          <Link to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
+            <button className="footer-nav-button">Backend Repo</button>
+          </Link>
+        </div>
+      </footer>
     </div>
   )
 }
