@@ -20,6 +20,7 @@ import Login from './Components/Authentication/login';
 import UserNav from './Components/Users/UserNav';
 // import SignInSide from './Components/SignInTest';
 import NavBar from './Components/NavBar';
+import Footer from './Components/Footer';
 
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(rootReducer, middleware);
@@ -38,6 +39,9 @@ ReactDOM.render(
         <Route exact path='/notes' component={AllNotes} />
         <Route exact path='/notes/:id' component={NoteDetail} />
         <Route exact path='/notes/:id/update' component={EditNote} />
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </Router>
   </Provider>

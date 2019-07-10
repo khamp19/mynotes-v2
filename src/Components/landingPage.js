@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    // height: '100vh',
     marginTop: '75px',
     overflow: 'hidden',
   },
@@ -56,15 +56,16 @@ const LandingPage = () => {
         <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Hello world!
+              Take Note
             </Typography>
             <div>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Welcome to my new and impoved note-taking app.
+                An app for keeping track of your thoughts
               </Typography>
               <p>
-                You can view the list of saved notes by clicking
-                the Note button. To create or update a note, please login or
+                View the list of saved notes by clicking
+                the Note button. </p>
+              <p>To create or update a note, please login or
                 register. There are links to the github repos for the frontend and backend
                 at the bottom of the page.
               </p>
@@ -74,16 +75,6 @@ const LandingPage = () => {
                 target="_blank" rel="noopener noreferrer">
                 My (Original) Notes Project
               </Link>
-              <br></br>
-              <div>
-                <p>Links to the repos for this project</p>
-                <Link component={RouterLink} to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
-                  <Button>Frontend Repo</Button>
-                </Link>
-                <Link component={RouterLink} to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
-                  <Button>Backend Repo</Button>
-                </Link>
-              </div>
             </div>
           </div>
         </Grid>
