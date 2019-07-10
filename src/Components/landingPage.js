@@ -1,36 +1,97 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 // import './landingpage.css';
+import Container from '@material-ui/core/Container';
+import LandingImg from '../assets/images/landing-linkedin-sales-navigator-u3hmzw5U-SI-unsplash.jpg';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    height: '100vh',
+    marginTop: '75px',
+    overflow: 'hidden',
+  },
+  image: {
+    backgroundImage: `url(${LandingImg})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+    height: '100vh',
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing(8),
+    padding: theme.spacing(6, 0),
+  },
+}));
 
 const LandingPage = () => {
+
+  const classes = useStyles()
+
   return (
-    <div className="landing-container">
-      <h2>Hello world!</h2>
-      <h4>Hey there. Welcome to my new and impoved note-taking app.</h4>
-      <p>
-        You can view the list of saved notes by clicking 
-        the Note button. To create or update a note, please login or
-        register. There are links to the github repos for the frontend and backend
-        at the bottom of the page.
-      </p>
-      <p>If you would like to see the old version of this project
-        please click here: </p>
-      <br></br>
-      <a href="https://mynotesproject.herokuapp.com/"
-        target="_blank" rel="noopener noreferrer">
-        My (Original) Notes Project
-      </a>
-      <footer>
-        <div className="button-container-bottom">
-          <Link to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
-            <button className="footer-nav-button">Frontend Repo</button>
-          </Link>
-          <Link to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
-            <button className="footer-nav-button">Backend Repo</button>
-          </Link>
-        </div>
-      </footer>
+    <div className={classes.root}>
+
+      <Grid container component="main">
+        <CssBaseline />
+        <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              Hello world!
+            </Typography>
+            <div>
+              <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                Welcome to my new and impoved note-taking app.
+              </Typography>
+              <p>
+                You can view the list of saved notes by clicking
+                the Note button. To create or update a note, please login or
+                register. There are links to the github repos for the frontend and backend
+                at the bottom of the page.
+              </p>
+              <p>If you would like to see the old version of this project
+                please click here: </p>
+              <Link component={RouterLink} to="https://mynotesproject.herokuapp.com/"
+                target="_blank" rel="noopener noreferrer">
+                My (Original) Notes Project
+              </Link>
+              <br></br>
+              <div>
+                <p>Links to the repos for this project</p>
+                <Link component={RouterLink} to='https://github.com/khamp19/mynotes-v2' target="_blank" rel="noopener noreferrer">
+                  <Button>Frontend Repo</Button>
+                </Link>
+                <Link component={RouterLink} to='https://github.com/khamp19/notes_project_II' target="_blank" rel="noopener noreferrer">
+                  <Button>Backend Repo</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Grid>
+
+        <Grid item xs={false} sm={4} md={6} className={classes.image} />
+
+      </Grid>
+
     </div>
   )
 }
