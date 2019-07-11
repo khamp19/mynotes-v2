@@ -8,8 +8,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+    // padding: theme.spacing(6),
+    height: '100px',
   },
 }));
 
@@ -18,7 +22,7 @@ const Footer = () => {
 
   return (
     <div>
-      <footer>
+      <footer className={classes.footer}>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Links to the repos for this project
         </Typography>
