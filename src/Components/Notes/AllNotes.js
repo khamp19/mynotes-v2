@@ -46,10 +46,6 @@ const styles = theme => ({
   cardContent: {
     flexGrow: 1,
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
 });
 
 class AllNotes extends Component {
@@ -86,8 +82,9 @@ class AllNotes extends Component {
               </div>
             </Container>
           </div>
+          {/* End hero unit */}
+          
           <Container className={classes.cardGrid} maxWidth="md">
-            {/* End hero unit */}
             <Grid container spacing={4}>
               {this.props.getting_notes ? <h3>Getting list of notes</h3> : null}
               {this.props.notes_error ? <h3>Cannot get notes</h3> : null}
