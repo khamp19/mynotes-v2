@@ -9,31 +9,38 @@ import { getUser } from '../../Actions/AuthActions';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
-  root: {
-    height: '75vh',
-    marginTop: '50px',
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
   },
-  card: {
-    height: '100%',
+  root: {
+    height: '100vh',
+    marginTop: '30px',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
+    // maxWidth: '400px',
+    width: '400px',
+    minWidth: '200px',
   },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
   },
-  cardContent: {
-    flexGrow: 1,
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
 });
 
@@ -67,63 +74,75 @@ class NoteDetail extends Component {
     date = moment(date, "YYYY-MM-DD").format("MMM Do YYYY");
 
     return (
-      <div >
-        <Grid container 
-          component="main"
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          className={classes.root}>
-          
-          {/* idk if i need this 
-          <CssBaseline /> */}
+      <div className="note-detail-container">
+        <div>
+          <Grid container component="main"
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            className={classes.root}
+          >
+            <CssBaseline />
+            <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+              <div className={classes.paper}>
+                {this.props.error ? <h4>Error getting this note</h4> : null}
+                {this.props.note ?
+                  <div>
+                    <Typography variant="h5">
+                      {title}
+                    </Typography>
+                    <div style={{ paddingTop: '30px', paddingLeft: '10px' }}>
+                      <Typography variant="body1" >
+                        {content}
+                      </Typography>
+                      <Typography variant="body1" >
+                        created by {username} on {date}
+                      </Typography>
+                    </div>
+                  </div>
+                  : null
+                }
+                
 
-          {this.props.error ? <h4>Error getting this note</h4> : null}
-          {this.props.note ? 
-            <Grid item xs={12} sm={8} md={8}>
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {title}
-                  </Typography>
-                  <Typography>
-                    {content}
-                  </Typography>
-                  </CardContent>
-                  <Typography>created by {username} on {date}</Typography>
-                <CardActions>
-                  <Link to={`/notes/${note_id}/update`} component={RouterLink}>
-                    <Button size="small" color="primary">
-                      Edit note
-                    </Button>
-                  </Link>
-                  <Button onClick={this.deleteNote}>Delete</Button>
-                </CardActions>
-              </Card>
-              <Link to='/notes' component={RouterLink}>
-                <button className="nav-button bt">Back</button>
-              </Link>
-            </Grid>
-            : null
-          }
-        </Grid>
-        <div className="button-container button-tools">
-          <div>
-            {loggedInUser === username ?
-              <div>
-                <Link to={`/notes/${note_id}/update`} >
-                  <button className="green-button bt">Edit</button>
-                </Link>
-                <button className="red-button bt" onClick={this.deleteNote}>Delete</button>
+                {loggedInUser === username ? 
+                  <Grid container justify="flex-end" style={{ paddingTop: '30px' }}>
+                    <Grid item>
+                      <Link to={`/notes/${note_id}/update`} component={RouterLink} variant="body2" >
+                        <Button >Edit</Button>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Button onClick={this.deleteNote}>Delete</Button>
+                    </Grid>
+                  </Grid>
+                  :
+                  <Grid container justify="flex-end">
+                    <Grid item>
+                      <Link to='/login' component={RouterLink} variant="body2">
+                        Please log in as {username} to edit or delete this note
+                      </Link>
+                    </Grid>
+                  </Grid>
+                }
               </div>
-              : <p>Please log in as {username} to edit or delete this note</p>
-            }
-          </div>
-          <Link to='/notes'>
-            <button className="nav-button bt">Back</button>
-          </Link>
+            </Grid>
+            <Grid container justify="flex-end" style={{ width: '45%', paddingTop: '30px'}}>
+              <Grid item>
+                <Link to='/notes' component={RouterLink} variant="body2" >
+                  <Button>Back</Button>
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
         </div>
+
+
+
+
+
+
+
       </div>
     )
   }

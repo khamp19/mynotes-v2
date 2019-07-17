@@ -12,6 +12,7 @@ import App from './App';
 import rootReducer from './Reducers/AllReducers';
 import AllNotes from './Components/Notes/AllNotes';
 import NoteDetail from './Components/Notes/NoteDetail';
+// import NoteDetailTest from './Components/Notes/NoteDetailTest';
 import EditNote from './Components/Notes/EditNote';
 import AddNote from './Components/Notes/AddNote';
 import Register from  './Components/Authentication/register';
