@@ -1,15 +1,52 @@
-//creates a new note
-//on success, redirects to the new note page
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link as RouterLink } from 'react-router-dom';
 
 //import add note action
 import { addNote } from '../../Actions/NotesActions';
 import { getUser } from '../../Actions/AuthActions';
-import './addNote.css';
+// import './addNote.css';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  root: {
+    height: '100vh',
+    marginTop: '30px',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // maxWidth: '400px',
+    width: '400px',
+    minWidth: '200px',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
+
+//creates a new note
+//on success, redirects to the new note page
 class AddNote extends Component {
   constructor(props){
     super(props);
@@ -54,7 +91,7 @@ class AddNote extends Component {
     //   })
     //   this.props.match.params.id = this.props.note.id;
     // }, 500)
-    this.props.history.push('/notes/');
+    this.props.history.push('/notes');
   }
 
   render() {
@@ -71,45 +108,80 @@ class AddNote extends Component {
     // }
 
     const { title, content } = this.state;
+    const { classes } = this.props;
+
     return (
-      <div className="add-note-container">
+      <div styles={{ marginBottom: '50px' }}>
         <div>
-          <h3>Add New Note</h3>
-          <div >
-            <form onSubmit={this.saveNote}>
-              <input 
-                className="note-title"
-                name="title"
-                type="text"
-                placeholder="title"
-                value={title}
-                onChange={this.handleInput} />
-              <div className="text-box">
-                <textarea 
-                  className="note-content"
-                  name="content"
-                  type="text"
-                  placeholder="add content here"
-                  value={content}
-                  onChange={this.handleInput}>
-                </textarea>
+          <Grid container component="main"
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            className={classes.root}
+          >
+            <CssBaseline />
+            <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+              <div className={classes.paper}>
+                  <div>
+                  <Typography component="h1" variant="h5" style={{ marginLeft: '30%' }} >
+                      Add New Note
+                    </Typography>
+                    <div style={{ paddingTop: '30px', paddingLeft: '10px' }}>
+                      <form className={classes.form} noValidate onSubmit={this.LogIn}>
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="title"
+                          label="title"
+                          name="title"
+                          value={title}
+                          autoFocus
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          multiline
+                          rows="4"
+                          name="content"
+                          label="content"
+                          type="content"
+                          id="content"
+                          value={content}
+                          onChange={this.handleInput}
+                        />
+                        <Button
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          className={classes.submit}
+                          onClick={this.saveNote}
+                        >
+                          Save Note
+                        </Button>
+                        <Link to='/notes' component={RouterLink} variant="body2" >
+                          <Button fullWidth variant="contained">Back</Button>
+                        </Link>
+                      </form>
+                    </div>
+                  </div>
               </div>
-            </form>
-            <div className="button-container button-tools">
-              <button 
-                  className="green-button bt"
-                  onClick={this.saveNote}>
-                  Save
-                </button>
-              <Link to='/notes'>
-                <button className="nav-button bt">Back</button>
-              </Link>
-            </div>
-          </div>
-        </div>        
+            </Grid>
+          </Grid>
+        </div>
       </div>
     )
   }
+}
+
+AddNote.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -121,4 +193,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { addNote, getUser })(AddNote);
+export default connect(mapStateToProps, { addNote, getUser })(withStyles(styles)(AddNote));

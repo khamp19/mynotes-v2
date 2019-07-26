@@ -39,7 +39,8 @@ const styles = theme => ({
   link: {
     textDecoration: 'none', 
     display: 'flex',
-  }
+  },
+  
 });
 
 class NavBar extends Component {

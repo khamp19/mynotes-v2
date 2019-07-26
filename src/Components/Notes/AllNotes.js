@@ -100,7 +100,6 @@ class AllNotes extends Component {
                       <Typography gutterBottom variant="h5" component="h2">
                         {note.title}
                       </Typography>
-                     
                     </CardContent>
                     <CardActions style={{ display: 'flex', paddingLeft: '60%' }}>
                       <Link to={`/notes/${note._id}`} component={RouterLink} >
