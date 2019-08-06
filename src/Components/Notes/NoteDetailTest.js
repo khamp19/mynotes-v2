@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addUser, getUser } from '../../Actions/AuthActions';
+import { getNote, deleteNote } from '../../Actions/NotesActions';
+import { getUser } from '../../Actions/AuthActions';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -31,6 +33,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    width: '400px'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -54,7 +57,7 @@ const styles = theme => ({
 
 
 
-class Register extends Component {
+class NoteDetailTest extends Component {
   state = {
     username: '',
     password: '',
@@ -65,14 +68,9 @@ class Register extends Component {
   }
 
   //check logged-in status
-  async componentDidMount() {
-    await this.props.getUser();
-  }
-
-  async componentDidUpdate(prevProps) {
-    if (this.props.loggedIn !== prevProps.loggedIn) {
-      await this.props.getUser();
-    }
+  componentDidMount() {
+    this.props.getNote(this.props.match.params.id);
+    this.props.getUser();
   }
 
   handleInput = (e) => {
@@ -99,17 +97,22 @@ class Register extends Component {
   }
 
   render() {
-    if (this.props.loggedIn === true) {
-      return <Redirect to='/notes' />
-    }
-
-    const { username, password, fullname, email, emailRep } = this.state;
+    const { title, content, created_at, username, fullname, password } = this.props.note;
     const { classes } = this.props;
+    const note_id = this.props.match.params.id;
+    let loggedInUser = localStorage.getItem('username');
+    // if(this.props.username){
+    //   loggedInUser = this.props.username;
+    // }
+    console.log(this.props.note);
+    let date = String(created_at);
+    date = date.substr(0, 10);
+    date = moment(date, "YYYY-MM-DD").format("MMM Do YYYY");
 
     return (
       <div>
-        <Grid container component="main" 
-          spacing={0} 
+        <Grid container component="main"
+          spacing={0}
           direction="column"
           alignItems="center"
           justify="center"
@@ -117,45 +120,15 @@ class Register extends Component {
         >
           <CssBaseline />
           <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Create an Account
+            <div className={classes.paper} fullWidth >
+              <Typography component="h1" variant="h5" fullWidth>
+                {title}
+              </Typography>
+              <Typography component="h1" variant="h5" fullWidth>
+                {content}
               </Typography>
               <form className={classes.form} noValidate onSubmit={this.createUser}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="fullname"
-                  label="Full Name"
-                  name="fullname"
-                  value={fullname}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  value={username}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={this.handleInput}
-                />
+
                 <Button
                   type="submit"
                   fullWidth
@@ -182,14 +155,16 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
+NoteDetailTest.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.AuthReducer.loggedIn,
+    getting_note: state.SelectedNoteReducer.getting_note,
+    note: state.SelectedNoteReducer.note,
+    error: state.SelectedNoteReducer.note_error,
   }
 }
 
-export default connect(mapStateToProps, { addUser, getUser })(withStyles(styles)(Register));
+export default connect(mapStateToProps, { getNote, getUser, deleteNote  })(withStyles(styles)(NoteDetailTest));
