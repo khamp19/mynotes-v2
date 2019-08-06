@@ -63,15 +63,19 @@ const LandingPage = () => {
                 An app for keeping track of your thoughts
               </Typography>
               <p>
-                View the list of saved notes by clicking
-                the Note button. </p>
-              <p>To create or update a note, please login or
-                register. There are links to the github repos for the frontend and backend
+                View the list of saved notes without logging in by clicking here: 
+              </p>
+              <Link component={RouterLink} to="/notes">
+                Notes
+              </Link> 
+              <p>To create or update a note, please login or register using the menu above. 
+                There are links to the github repos for the frontend and backend
                 at the bottom of the page.
               </p>
               <p>If you would like to see the old version of this project
-                please click here: </p>
-              <Link component={RouterLink} to="https://mynotesproject.herokuapp.com/"
+                please click here: 
+              </p>
+              <Link to="https://mynotesproject.herokuapp.com/"
                 target="_blank" rel="noopener noreferrer">
                 My (Original) Notes Project
               </Link>

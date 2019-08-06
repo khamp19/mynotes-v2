@@ -131,8 +131,8 @@ class NavBar extends Component {
                       New Note
                     </Link>
                   </MenuItem>
-                  <MenuItem>Profile</MenuItem>
-                  <MenuItem>About</MenuItem>
+                  {/*<MenuItem>Profile</MenuItem>*/}
+                  {/*<MenuItem>About</MenuItem>*/}
                   <MenuItem>
                     <Logout />
                   </MenuItem>
