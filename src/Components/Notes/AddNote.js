@@ -25,7 +25,7 @@ const styles = theme => ({
   },
   root: {
     height: '100vh',
-    marginTop: '30px',
+    // marginTop: '30px',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -165,10 +165,14 @@ class AddNote extends Component {
                         >
                           Save Note
                         </Button>
-                        <Link to='/notes' component={RouterLink} variant="body2" >
-                          <Button fullWidth variant="contained">Back</Button>
-                        </Link>
                       </form>
+                      <Grid container justify="flex-end">
+                        <Grid item>
+                          <Link to='/notes' component={RouterLink} variant="body2" >
+                            <Button>Back</Button>
+                          </Link>
+                        </Grid>
+                      </Grid>
                     </div>
                   </div>
               </div>

@@ -24,7 +24,7 @@ const styles = theme => ({
   },
   root: {
     height: '100vh',
-    marginTop: '30px',
+    // marginTop: '30px',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -93,10 +93,10 @@ class NoteDetail extends Component {
                       {title}
                     </Typography>
                     <div style={{ paddingTop: '30px', paddingLeft: '10px' }}>
-                      <Typography variant="body1" >
+                      <Typography variant="body1">
                         {content}
                       </Typography>
-                      <Typography variant="body1" >
+                      <Typography variant="body1">
                         created by {username} on {date}
                       </Typography>
                     </div>
@@ -104,16 +104,29 @@ class NoteDetail extends Component {
                   : null
                 }
                 
-
                 {loggedInUser === username ? 
-                  <Grid container justify="flex-end" style={{ paddingTop: '30px' }}>
+                  <Grid container justify="flex-end" >
                     <Grid item>
                       <Link to={`/notes/${note_id}/update`} component={RouterLink} variant="body2" >
-                        <Button >Edit</Button>
+                        <Button 
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                          className={classes.submit}>
+                          Edit
+                        </Button>
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Button onClick={this.deleteNote}>Delete</Button>
+                      <Button
+                        style={{ backgroundColor: 'red', marginLeft: '10px' }}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={this.deleteNote}>
+                        Delete
+                      </Button>
                     </Grid>
                   </Grid>
                   :
@@ -125,24 +138,17 @@ class NoteDetail extends Component {
                     </Grid>
                   </Grid>
                 }
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link to='/notes' component={RouterLink} variant="body2" >
+                      <Button>Back</Button>
+                    </Link>
+                  </Grid>
+                </Grid>
               </div>
-            </Grid>
-            <Grid container justify="flex-end" style={{ width: '45%', paddingTop: '30px'}}>
-              <Grid item>
-                <Link to='/notes' component={RouterLink} variant="body2" >
-                  <Button>Back</Button>
-                </Link>
-              </Grid>
             </Grid>
           </Grid>
         </div>
-
-
-
-
-
-
-
       </div>
     )
   }
